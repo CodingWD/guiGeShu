@@ -412,13 +412,20 @@ export default function App() {
     ctx.restore();
   };
 
-  const renderTemplateToCanvas = (ctx, tpl, data, img, scalePerc, width = 750, height = 400) => {
+  const renderTemplateToCanvas = (ctx, tpl, data, img, scalePerc, width = 750, height = 400, superScale = 2) => {
     const tplId = tpl.id;
     const scaleX = width / 750;
     const scaleY = height / 400;
     const scaleText = scaleY;
 
-    ctx.clearRect(0, 0, width, height);
+    ctx.clearRect(0, 0, width * superScale, height * superScale);
+
+    ctx.save();
+    ctx.scale(superScale, superScale);
+
+    // 启用高质量平滑滤波
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = 'high';
 
     if (tplId === 'cover') {
       const bgGradient = ctx.createLinearGradient(0, 0, width, height);
@@ -549,16 +556,20 @@ export default function App() {
     if (canvasGrid) {
       drawGrid(ctx, scaleX, scaleY, width, height);
     }
+
+    ctx.restore();
   };
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
-    canvas.width = selectedRes.width;
-    canvas.height = selectedRes.height;
     
-    renderTemplateToCanvas(ctx, activeTemplate, formData, productImages[activeTemplate.id], imageScales[activeTemplate.id], selectedRes.width, selectedRes.height);
+    const superScale = 2; // 2 倍超清超采样
+    canvas.width = selectedRes.width * superScale;
+    canvas.height = selectedRes.height * superScale;
+    
+    renderTemplateToCanvas(ctx, activeTemplate, formData, productImages[activeTemplate.id], imageScales[activeTemplate.id], selectedRes.width, selectedRes.height, superScale);
 
   }, [activeTemplate, formData, productImages, imageScales, canvasGrid, imagePositions, selectedRes]);
 
@@ -574,13 +585,14 @@ export default function App() {
   const handleDownloadAll = async () => {
     setBatchStatus('exporting');
     try {
+      const superScale = 2; // 2 倍超清超采样
       for (const tpl of TEMPLATES) {
         const tempCanvas = document.createElement('canvas');
-        tempCanvas.width = selectedRes.width;
-        tempCanvas.height = selectedRes.height;
+        tempCanvas.width = selectedRes.width * superScale;
+        tempCanvas.height = selectedRes.height * superScale;
         const tempCtx = tempCanvas.getContext('2d');
         
-        renderTemplateToCanvas(tempCtx, tpl, formData, productImages[tpl.id], imageScales[tpl.id], selectedRes.width, selectedRes.height);
+        renderTemplateToCanvas(tempCtx, tpl, formData, productImages[tpl.id], imageScales[tpl.id], selectedRes.width, selectedRes.height, superScale);
         
         const url = tempCanvas.toDataURL('image/png', 1.0);
         const link = document.createElement('a');
