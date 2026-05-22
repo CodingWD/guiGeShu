@@ -30,8 +30,8 @@ const TEMPLATES = [
     themeColor: 'from-blue-600 to-indigo-400',
     description: '科技感渐变背景，适合作为首图突出产品型号与品类',
     fields: [
-      { id: 'title', label: '主标题 (大黑体)', default: 'E200 Series', defaultSize: 46, defaultLh: 50, isBold: true, color: '#000000', defaultX: 390, defaultY: 200 },
-      { id: 'subtitle', label: '副标题', default: 'Embedded Mini Size IPC', defaultSize: 24, defaultLh: 30, isBold: false, color: '#000000', defaultX: 330, defaultY: 270 }
+      { id: 'title', label: '主标题 (大黑体)', default: 'E200 Series', defaultSize: 46, defaultLh: 50, isBold: true, color: '#000000', defaultX: 390, defaultY: 200, maxWidth: 330, aiDesc: "Main title of the poster. Must be very short (1-3 words), e.g., 'E200 Series' or 'Industrial PC'." },
+      { id: 'subtitle', label: '副标题', default: 'Embedded Mini Size IPC', defaultSize: 24, defaultLh: 30, isBold: false, color: '#000000', defaultX: 330, defaultY: 270, maxWidth: 390, aiDesc: "Subtitle describing the product class. Short (3-5 words), e.g., 'Embedded Mini Size IPC'." }
     ]
   },
   {
@@ -40,11 +40,11 @@ const TEMPLATES = [
     themeColor: 'from-sky-200 to-blue-300',
     description: '突出强大的CPU计算核心与内存插槽特性',
     fields: [
-      { id: 'title', label: '主标题', default: 'Powerful', defaultSize: 46, defaultLh: 50, isBold: true, color: '#000000', defaultX: 110, defaultY: 80 },
-      { id: 'subtitle', label: '蓝字副标题', default: 'Based on Intel Processor Platform', defaultSize: 20, defaultLh: 28, isBold: false, color: '#4a9af8', defaultX: 60, defaultY: 140 },
-      { id: 'desc', label: '段落描述 (按回车换行)', default: 'Intel® Pentium® J4205/Celeron® J3455 processor,\n\nBased on powerful data processing and computing\ncapabilities, it has excellent performance in embedded\napplications.', isMultiline: true, defaultSize: 13, defaultLh: 22, isBold: false, color: '#222222', defaultX: 60, defaultY: 190 },
-      { id: 'bullet1', label: '特性 1', default: '· LPDDR4 memory socket', defaultSize: 16, defaultLh: 24, isBold: true, color: '#000000', defaultX: 50, defaultY: 300 },
-      { id: 'bullet2', label: '特性 2', default: '· Max. 8GB memory capacity', defaultSize: 16, defaultLh: 24, isBold: true, color: '#000000', defaultX: 50, defaultY: 340 }
+      { id: 'title', label: '主标题', default: 'Powerful', defaultSize: 46, defaultLh: 50, isBold: true, color: '#000000', defaultX: 110, defaultY: 80, maxWidth: 580, aiDesc: "Main title showing a core feature. 1-2 words, e.g., 'Powerful' or 'High Performance'." },
+      { id: 'subtitle', label: '蓝字副标题', default: 'Based on Intel Processor Platform', defaultSize: 20, defaultLh: 28, isBold: false, color: '#4a9af8', defaultX: 60, defaultY: 140, maxWidth: 320, aiDesc: "Sub-headline. Short phrase (3-6 words), e.g., 'Based on Intel Processor Platform'." },
+      { id: 'desc', label: '段落描述 (按回车换行)', default: 'Intel® Pentium® J4205/Celeron® J3455 processor,\n\nBased on powerful data processing and computing\ncapabilities, it has excellent performance in embedded\napplications.', isMultiline: true, defaultSize: 13, defaultLh: 22, isBold: false, color: '#222222', defaultX: 60, defaultY: 190, maxWidth: 320, aiDesc: "Paragraph description. A brief introduction of the CPU and processing capabilities, about 15-25 words. You must insert \\n every 6-8 words to break it into 3-4 short lines to prevent layout overflow." },
+      { id: 'bullet1', label: '特性 1', default: '· LPDDR4 memory socket', defaultSize: 16, defaultLh: 24, isBold: true, color: '#000000', defaultX: 50, defaultY: 300, maxWidth: 330, aiDesc: "Bullet point 1. A short highlight, must start with '· ' and be 3-5 words, e.g., '· LPDDR4 Memory Socket'." },
+      { id: 'bullet2', label: '特性 2', default: '· Max. 8GB memory capacity', defaultSize: 16, defaultLh: 24, isBold: true, color: '#000000', defaultX: 50, defaultY: 340, maxWidth: 330, aiDesc: "Bullet point 2. A short highlight, must start with '· ' and be 3-5 words, e.g., '· Max. 8GB Capacity'." }
     ]
   },
   {
@@ -53,9 +53,9 @@ const TEMPLATES = [
     themeColor: 'from-blue-50 to-sky-200',
     description: '丰富接口展示版式，产品图自带标注',
     fields: [
-      { id: 'title', label: '主标题', default: 'Rich Interfaces', defaultSize: 46, defaultLh: 50, isBold: true, color: '#000000', defaultX: 400, defaultY: 90 },
-      { id: 'subtitle', label: '蓝字副标题', default: 'Meet different application needs', defaultSize: 22, defaultLh: 30, isBold: false, color: '#4a9af8', defaultX: 400, defaultY: 140 },
-      { id: 'desc', label: '段落描述 (按回车换行)', default: 'The front panel includes 1 HDMI, resolution up to\n3840 x 2160@30Hz, 2 Gigabit Ethernet interfaces\ncontrolled by independent chips. 4 serial ports,\n4 USB interfaces. Besides, 2 CAN are optional.', isMultiline: true, defaultSize: 13, defaultLh: 22, isBold: false, color: '#444444', defaultX: 400, defaultY: 190 }
+      { id: 'title', label: '主标题', default: 'Rich Interfaces', defaultSize: 46, defaultLh: 50, isBold: true, color: '#000000', defaultX: 400, defaultY: 90, maxWidth: 320, aiDesc: "Main title. 1-2 words, e.g., 'Rich Interfaces' or 'Connectivity'." },
+      { id: 'subtitle', label: '蓝字副标题', default: 'Meet different application needs', defaultSize: 22, defaultLh: 30, isBold: false, color: '#4a9af8', defaultX: 400, defaultY: 140, maxWidth: 320, aiDesc: "Sub-headline. Short phrase (3-6 words), e.g., 'Meet Different Application Needs'." },
+      { id: 'desc', label: '段落描述 (按回车换行)', default: 'The front panel includes 1 HDMI, resolution up to\n3840 x 2160@30Hz, 2 Gigabit Ethernet interfaces\ncontrolled by independent chips. 4 serial ports,\n4 USB interfaces. Besides, 2 CAN are optional.', isMultiline: true, defaultSize: 13, defaultLh: 22, isBold: false, color: '#444444', defaultX: 400, defaultY: 190, maxWidth: 320, aiDesc: "Paragraph description of connectivity. Summary of ports, about 20-30 words. You must insert \\n every 6-8 words to break it into 4-5 short lines." }
     ]
   },
   {
@@ -64,11 +64,11 @@ const TEMPLATES = [
     themeColor: 'from-slate-100 to-indigo-100',
     description: '工业感深色图片框与尺寸标注信息卡片',
     fields: [
-      { id: 'title', label: '主标题', default: 'Rugged and Compact', defaultSize: 40, defaultLh: 46, isBold: true, color: '#000000', defaultX: 35, defaultY: 80 },
-      { id: 'subtitle', label: '蓝字副标题', default: 'Stable in industrial environment', defaultSize: 18, defaultLh: 26, isBold: false, color: '#2493ff', defaultX: 35, defaultY: 125 },
-      { id: 'desc', label: '段落描述 (按回车换行)', default: 'The shell of E200 adopts reinforced aluminum\nalloy gold.Tested to industry-grade standards,\nit has stronger resistance to corrosion,anti-rust.\nanti-interference ability in harsh industrial envir\n-onment. Modular and compact design structure.', isMultiline: true, defaultSize: 13, defaultLh: 20, isBold: false, color: '#4c5561', defaultX: 35, defaultY: 170 },
-      { id: 'sizeOverall', label: '整机尺寸', default: '172 x 125 x 62.5mm', defaultSize: 24, defaultLh: 30, isBold: true, color: '#000000', defaultX: 50, defaultY: 315 },
-      { id: 'sizeBoard', label: '主板尺寸', default: '146 x 102mm', defaultSize: 18, defaultLh: 24, isBold: true, color: '#000000', defaultX: 50, defaultY: 350 }
+      { id: 'title', label: '主标题', default: 'Rugged and Compact', defaultSize: 40, defaultLh: 46, isBold: true, color: '#000000', defaultX: 35, defaultY: 80, maxWidth: 280, aiDesc: "Main title. 2-3 words, e.g., 'Rugged and Compact' or 'Industrial Grade'." },
+      { id: 'subtitle', label: '蓝字副标题', default: 'Stable in industrial environment', defaultSize: 18, defaultLh: 26, isBold: false, color: '#2493ff', defaultX: 35, defaultY: 125, maxWidth: 280, aiDesc: "Sub-headline. Short phrase (3-6 words), e.g., 'Stable in Harsh Environments'." },
+      { id: 'desc', label: '段落描述 (按回车换行)', default: 'The shell of E200 adopts reinforced aluminum\nalloy gold.Tested to industry-grade standards,\nit has stronger resistance to corrosion,anti-rust.\nanti-interference ability in harsh industrial envir\n-onment. Modular and compact design structure.', isMultiline: true, defaultSize: 13, defaultLh: 20, isBold: false, color: '#4c5561', defaultX: 35, defaultY: 170, maxWidth: 280, aiDesc: "Paragraph description of materials and build. About 20-30 words. You must insert \\n every 6-8 words to break it into 4-5 short lines." },
+      { id: 'sizeOverall', label: '整机尺寸', default: '172 x 125 x 62.5mm', defaultSize: 24, defaultLh: 30, isBold: true, color: '#000000', defaultX: 50, defaultY: 315, maxWidth: 300, aiDesc: "Overall size of the device. Typically numbers like '172 x 125 x 62.5mm' or similar, max 4 words." },
+      { id: 'sizeBoard', label: '主板尺寸', default: '146 x 102mm', defaultSize: 18, defaultLh: 24, isBold: true, color: '#000000', defaultX: 50, defaultY: 350, maxWidth: 300, aiDesc: "Motherboard size. Typically numbers like '146 x 102mm' or similar, max 4 words." }
     ]
   }
 ];
@@ -109,6 +109,13 @@ export default function App() {
   const [productImages, setProductImages] = useState({}); 
   const [imageScales, setImageScales] = useState({ cover: 100, performance: 100, interfaces: 100, rugged: 100 }); 
   const [imagePositions, setImagePositions] = useState({ ...DEFAULT_IMAGE_POSITIONS });
+  
+  // 画布级拖拽、缩放交互状态
+  const [selectedElement, setSelectedElement] = useState(null); // { type: 'text' | 'image', id?: string }
+  const [hoveredElement, setHoveredElement] = useState(null); // 同上
+  const [dragStart, setDragStart] = useState(null); // { mouseX, mouseY, originalX, originalY, originalScale }
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragMode, setDragMode] = useState(null); // 'move' | 'resize'
   
   // AI 助手状态
   const [pdfBase64, setPdfBase64] = useState(null);
@@ -196,12 +203,19 @@ export default function App() {
 
       const schemaProps = {};
       activeTemplate.fields.forEach(f => {
-        schemaProps[f.id] = { type: "STRING", description: f.label };
+        schemaProps[f.id] = { type: "STRING", description: f.aiDesc || f.label };
       });
 
-      const systemInstruction = "你是阿里国际站 (Alibaba.com) 的资深 B2B 英文营销文案专家。擅长提炼工业级产品（如工控机）的核心卖点。请根据提供的资料，使用专业、简洁、极具吸引力的全英文生成营销海报文案。请关注耐用性 (Durability)、高性能 (High Performance)、接口丰富度 (Rich Interfaces) 等 B2B 买家核心诉求。";
+      const systemInstruction = "你是阿里国际站 (Alibaba.com) 的资深 B2B 英文营销文案专家。擅长提炼工业级产品（如工控机）的核心卖点。请根据提供的资料，使用专业、简洁、极具吸引力的全英文生成营销海报文案。请关注耐用性 (Durability)、高性能 (High Performance)、接口丰富度 (Rich Interfaces) 等 B2B 买家核心诉求。你必须严格控制生成文案的长度，使每个字段的字数契合海报排版空间，防止文字重叠和超宽。";
       
-      const promptText = `请根据我提供的产品说明书PDF（如果有上传），以及以下补充的文字说明（如果有填写），为当前的营销海报【${activeTemplate.name}】自动编写全英文文案。如果没有提供任何信息，请根据海报主题自动编造一套标准工业计算机的高质量默认文案。请严格返回 JSON 格式，并映射到要求的字段中。注意文案断句时可以使用 \\n 进行换行。\n\n补充产品参数说明：${aiInputText}`;
+      const promptText = `请根据我提供的产品说明书PDF（如果有上传），以及以下补充的文字说明（如果有填写），为当前的营销海报【${activeTemplate.name}】自动编写全英文文案。如果没有提供任何信息，请根据海报主题自动编造一套标准工业计算机的高质量默认文案。请严格返回 JSON 格式，并映射到要求的字段中。注意文案断句时可以使用 \\n 进行换行。
+
+重要限制要求（关系到海报排版美观，请严格遵守）：
+1. 仔细阅读每个字段的描述（description）并遵循其最大字数限制。请务必保持内容短小精练。
+2. 绝对不要生成长篇大论。例如特性/Bullet points（如 bullet1, bullet2 等）必须是极短的句式（3-5 个单词），如 "· LPDDR4 Memory Support"。
+3. 对于多行段落描述 (desc)，请每隔 6-8 个单词适当插入 \\n 换行符，且总长度不要超过 25 个单词。
+
+补充产品参数说明：${aiInputText}`;
 
       const parts = [{ text: promptText }];
       
@@ -375,7 +389,55 @@ export default function App() {
     ctx.fillStyle = field.color;
     ctx.font = `${field.isBold ? 'bold ' : ''}${scaledSize}px "Segoe UI", "Microsoft YaHei", sans-serif`;
     
-    const lines = text.split('\\n').join('\n').split('\n');
+    // 获取允许的最大宽度。若未配置，默认给出一个足够宽的边界值（避免文字重叠）
+    const fieldMaxWidth = field.maxWidth ? field.maxWidth * scaleX : 600 * scaleX;
+    
+    const rawParagraphs = text.split('\\n').join('\n').split('\n');
+    const lines = [];
+
+    rawParagraphs.forEach(para => {
+      if (!para) {
+        lines.push('');
+        return;
+      }
+      
+      // 判断是否包含空格（主要是英文段落，保留完整单词折行）
+      if (para.includes(' ')) {
+        const words = para.split(' ');
+        let currentLine = '';
+        words.forEach(word => {
+          const testLine = currentLine ? currentLine + ' ' + word : word;
+          const testWidth = ctx.measureText(testLine).width;
+          if (testWidth > fieldMaxWidth && currentLine) {
+            lines.push(currentLine);
+            currentLine = word;
+          } else {
+            currentLine = testLine;
+          }
+        });
+        if (currentLine) {
+          lines.push(currentLine);
+        }
+      } else {
+        // 中文或无空格的连字符长单词，按字符宽度进行强制折行
+        let currentLine = '';
+        for (let i = 0; i < para.length; i++) {
+          const char = para[i];
+          const testLine = currentLine + char;
+          const testWidth = ctx.measureText(testLine).width;
+          if (testWidth > fieldMaxWidth && currentLine) {
+            lines.push(currentLine);
+            currentLine = char;
+          } else {
+            currentLine = testLine;
+          }
+        }
+        if (currentLine) {
+          lines.push(currentLine);
+        }
+      }
+    });
+
     lines.forEach((line, index) => {
       ctx.fillText(line, scaledX, scaledY + (index * scaledLh));
     });
@@ -412,7 +474,111 @@ export default function App() {
     ctx.restore();
   };
 
-  const renderTemplateToCanvas = (ctx, tpl, data, img, scalePerc, width = 750, height = 400, superScale = 2) => {
+  // 获取特定模板中各元素在 750x400 设计分辨率下的 bounding box
+  const getElementBounds = (ctx, tplId) => {
+    const tpl = TEMPLATES.find(t => t.id === tplId);
+    if (!tpl) return [];
+
+    const bounds = [];
+
+    // 1. 获取图片的位置与尺寸范围
+    const imgSizeMap = {
+      cover: { w: 300, h: 220 },
+      performance: { w: 330, h: 210 },
+      interfaces: { w: 280, h: 180 },
+      rugged: { w: 310, h: 200 }
+    };
+    const imgSize = imgSizeMap[tplId];
+    const imgPos = imagePositions[tplId] || DEFAULT_IMAGE_POSITIONS[tplId];
+    bounds.push({
+      type: 'image',
+      id: 'product_image',
+      x: imgPos.x,
+      y: imgPos.y,
+      width: imgSize.w,
+      height: imgSize.h
+    });
+
+    // 2. 获取每个文字字段的范围
+    ctx.save();
+    tpl.fields.forEach(field => {
+      const text = formData[`${tplId}_${field.id}`] || '';
+      const size = formData[`${tplId}_${field.id}_size`] || field.defaultSize;
+      const lh = formData[`${tplId}_${field.id}_lh`] || field.defaultLh;
+      const x = formData[`${tplId}_${field.id}_x`] ?? field.defaultX;
+      const y = formData[`${tplId}_${field.id}_y`] ?? field.defaultY;
+
+      ctx.font = `${field.isBold ? 'bold ' : ''}${size}px "Segoe UI", "Microsoft YaHei", sans-serif`;
+
+      const fieldMaxWidth = field.maxWidth ? field.maxWidth : 600;
+      const rawParagraphs = text.split('\\n').join('\n').split('\n');
+      const lines = [];
+
+      rawParagraphs.forEach(para => {
+        if (!para) {
+          lines.push('');
+          return;
+        }
+        if (para.includes(' ')) {
+          const words = para.split(' ');
+          let currentLine = '';
+          words.forEach(word => {
+            const testLine = currentLine ? currentLine + ' ' + word : word;
+            const testWidth = ctx.measureText(testLine).width;
+            if (testWidth > fieldMaxWidth && currentLine) {
+              lines.push(currentLine);
+              currentLine = word;
+            } else {
+              currentLine = testLine;
+            }
+          });
+          if (currentLine) {
+            lines.push(currentLine);
+          }
+        } else {
+          let currentLine = '';
+          for (let i = 0; i < para.length; i++) {
+            const char = para[i];
+            const testLine = currentLine + char;
+            const testWidth = ctx.measureText(testLine).width;
+            if (testWidth > fieldMaxWidth && currentLine) {
+              lines.push(currentLine);
+              currentLine = char;
+            } else {
+              currentLine = testLine;
+            }
+          }
+          if (currentLine) {
+            lines.push(currentLine);
+          }
+        }
+      });
+
+      let maxLineWidth = 0;
+      lines.forEach(line => {
+        const w = ctx.measureText(line).width;
+        if (w > maxLineWidth) {
+          maxLineWidth = w;
+        }
+      });
+
+      const totalHeight = lines.length * lh;
+
+      bounds.push({
+        type: 'text',
+        id: field.id,
+        x: x,
+        y: y - size,
+        width: Math.max(maxLineWidth, 30),
+        height: Math.max(totalHeight, lh)
+      });
+    });
+
+    ctx.restore();
+    return bounds;
+  };
+
+  const renderTemplateToCanvas = (ctx, tpl, data, img, scalePerc, width = 750, height = 400, superScale = 2, isExporting = false) => {
     const tplId = tpl.id;
     const scaleX = width / 750;
     const scaleY = height / 400;
@@ -553,7 +719,53 @@ export default function App() {
       }
     }
 
-    if (canvasGrid) {
+    // 只有在非导出状态下，才绘制选中/悬停虚线框及手柄
+    if (!isExporting) {
+      const bounds = getElementBounds(ctx, tplId);
+      
+      // 1. 绘制悬停框
+      if (hoveredElement) {
+        const hBound = bounds.find(b => b.type === hoveredElement.type && b.id === hoveredElement.id);
+        if (hBound) {
+          ctx.save();
+          ctx.strokeStyle = 'rgba(79, 70, 229, 0.45)'; // 浅紫色/蓝色
+          ctx.lineWidth = 1 * scaleY;
+          ctx.setLineDash([4 * scaleY, 3 * scaleY]);
+          ctx.strokeRect(hBound.x * scaleX, hBound.y * scaleY, hBound.width * scaleX, hBound.height * scaleY);
+          ctx.restore();
+        }
+      }
+
+      // 2. 绘制选中边框与控制点
+      if (selectedElement) {
+        const sBound = bounds.find(b => b.type === selectedElement.type && b.id === selectedElement.id);
+        if (sBound) {
+          ctx.save();
+          ctx.strokeStyle = '#4f46e5'; // 经典 Indigo
+          ctx.lineWidth = 1.5 * scaleY;
+          ctx.strokeRect(sBound.x * scaleX, sBound.y * scaleY, sBound.width * scaleX, sBound.height * scaleY);
+          
+          // 如果选中了产品图，绘制缩放手柄（在右下角）
+          if (selectedElement.type === 'image') {
+            const handleX = (sBound.x + sBound.width) * scaleX;
+            const handleY = (sBound.y + sBound.height) * scaleY;
+            const handleR = 5 * scaleY;
+            
+            ctx.fillStyle = '#ffffff';
+            ctx.strokeStyle = '#4f46e5';
+            ctx.lineWidth = 1.5 * scaleY;
+            
+            ctx.beginPath();
+            ctx.arc(handleX, handleY, handleR, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.stroke();
+          }
+          ctx.restore();
+        }
+      }
+    }
+
+    if (canvasGrid && !isExporting) {
       drawGrid(ctx, scaleX, scaleY, width, height);
     }
 
@@ -571,11 +783,28 @@ export default function App() {
     
     renderTemplateToCanvas(ctx, activeTemplate, formData, productImages[activeTemplate.id], imageScales[activeTemplate.id], selectedRes.width, selectedRes.height, superScale);
 
-  }, [activeTemplate, formData, productImages, imageScales, canvasGrid, imagePositions, selectedRes]);
+  }, [activeTemplate, formData, productImages, imageScales, canvasGrid, imagePositions, selectedRes, selectedElement, hoveredElement]);
 
   const handleDownloadSingle = () => {
-    const canvas = canvasRef.current;
-    const url = canvas.toDataURL('image/png', 1.0);
+    const superScale = 2;
+    const tempCanvas = document.createElement('canvas');
+    tempCanvas.width = selectedRes.width * superScale;
+    tempCanvas.height = selectedRes.height * superScale;
+    const tempCtx = tempCanvas.getContext('2d');
+    
+    renderTemplateToCanvas(
+      tempCtx, 
+      activeTemplate, 
+      formData, 
+      productImages[activeTemplate.id], 
+      imageScales[activeTemplate.id], 
+      selectedRes.width, 
+      selectedRes.height, 
+      superScale,
+      true // isExporting = true
+    );
+    
+    const url = tempCanvas.toDataURL('image/png', 1.0);
     const link = document.createElement('a');
     link.download = `yantronic_${activeTemplate.id}_${selectedRes.width}x${selectedRes.height}.png`;
     link.href = url;
@@ -592,7 +821,7 @@ export default function App() {
         tempCanvas.height = selectedRes.height * superScale;
         const tempCtx = tempCanvas.getContext('2d');
         
-        renderTemplateToCanvas(tempCtx, tpl, formData, productImages[tpl.id], imageScales[tpl.id], selectedRes.width, selectedRes.height, superScale);
+        renderTemplateToCanvas(tempCtx, tpl, formData, productImages[tpl.id], imageScales[tpl.id], selectedRes.width, selectedRes.height, superScale, true);
         
         const url = tempCanvas.toDataURL('image/png', 1.0);
         const link = document.createElement('a');
@@ -608,6 +837,175 @@ export default function App() {
       console.error(e);
       setBatchStatus(null);
     }
+  };
+
+  const getMouseCoords = (e) => {
+    const canvas = canvasRef.current;
+    if (!canvas) return { x: 0, y: 0 };
+    const rect = canvas.getBoundingClientRect();
+    
+    // 映射回 750x400 基准设计分辨率坐标
+    const x = ((e.clientX - rect.left) / rect.width) * 750;
+    const y = ((e.clientY - rect.top) / rect.height) * 400;
+    
+    return { x, y };
+  };
+
+  const handleCanvasMouseDown = (e) => {
+    if (batchStatus === 'exporting') return;
+    e.preventDefault(); // 阻止默认的文本选择与拖动
+    const { x, y } = getMouseCoords(e);
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const bounds = getElementBounds(ctx, activeTemplate.id);
+
+    // 1. 检查是否击击中了当前选中图片的右下角缩放手柄
+    if (selectedElement && selectedElement.type === 'image') {
+      const imgBound = bounds.find(b => b.type === 'image');
+      if (imgBound) {
+        const handleX = imgBound.x + imgBound.width;
+        const handleY = imgBound.y + imgBound.height;
+        const dist = Math.hypot(x - handleX, y - handleY);
+        if (dist <= 15) {
+          setDragStart({
+            mouseX: x,
+            mouseY: y,
+            originalScale: imageScales[activeTemplate.id] || 100,
+            originalX: imgBound.x,
+            originalY: imgBound.y
+          });
+          setDragMode('resize');
+          setIsDragging(true);
+          return;
+        }
+      }
+    }
+
+    // 2. 检查是否击中了文字或图片（文字层优先级高于图片层，方便重叠点击）
+    const hit = [...bounds].reverse().find(b => {
+      return x >= b.x && x <= b.x + b.width && y >= b.y && y <= b.y + b.height;
+    });
+
+    if (hit) {
+      if (hit.type === 'text') {
+        const fieldId = hit.id;
+        const currentX = formData[`${activeTemplate.id}_${fieldId}_x`] ?? activeTemplate.fields.find(f => f.id === fieldId).defaultX;
+        const currentY = formData[`${activeTemplate.id}_${fieldId}_y`] ?? activeTemplate.fields.find(f => f.id === fieldId).defaultY;
+        
+        setDragStart({
+          mouseX: x,
+          mouseY: y,
+          originalX: currentX,
+          originalY: currentY
+        });
+        setSelectedElement({ type: 'text', id: fieldId });
+        setDragMode('move');
+        setIsDragging(true);
+      } else if (hit.type === 'image') {
+        const currentPos = imagePositions[activeTemplate.id] || DEFAULT_IMAGE_POSITIONS[activeTemplate.id];
+        setDragStart({
+          mouseX: x,
+          mouseY: y,
+          originalX: currentPos.x,
+          originalY: currentPos.y
+        });
+        setSelectedElement({ type: 'image', id: 'product_image' });
+        setDragMode('move');
+        setIsDragging(true);
+      }
+    } else {
+      setSelectedElement(null); // 点击空白处取消选中
+    }
+  };
+
+  const handleCanvasMouseMove = (e) => {
+    if (batchStatus === 'exporting') return;
+    const { x, y } = getMouseCoords(e);
+
+    // 1. 如果没有拖动，处理 Hover 状态和光标改变
+    if (!isDragging) {
+      const canvas = canvasRef.current;
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const bounds = getElementBounds(ctx, activeTemplate.id);
+      
+      let handleHovered = false;
+      if (selectedElement && selectedElement.type === 'image') {
+        const imgBound = bounds.find(b => b.type === 'image');
+        if (imgBound) {
+          const handleX = imgBound.x + imgBound.width;
+          const handleY = imgBound.y + imgBound.height;
+          const dist = Math.hypot(x - handleX, y - handleY);
+          if (dist <= 15) {
+            handleHovered = true;
+          }
+        }
+      }
+      
+      if (handleHovered) {
+        e.target.style.cursor = 'nwse-resize';
+        setHoveredElement(null);
+        return;
+      }
+
+      const hit = [...bounds].reverse().find(b => {
+        return x >= b.x && x <= b.x + b.width && y >= b.y && y <= b.y + b.height;
+      });
+
+      if (hit) {
+        e.target.style.cursor = 'move';
+        setHoveredElement({ type: hit.type, id: hit.id });
+      } else {
+        e.target.style.cursor = 'default';
+        setHoveredElement(null);
+      }
+      return;
+    }
+
+    // 2. 正在进行拖拽或缩放
+    if (isDragging && dragStart && dragMode) {
+      const dx = x - dragStart.mouseX;
+      const dy = y - dragStart.mouseY;
+
+      if (dragMode === 'move') {
+        const newX = Math.round(dragStart.originalX + dx);
+        const newY = Math.round(dragStart.originalY + dy);
+
+        if (selectedElement.type === 'text') {
+          const fieldId = selectedElement.id;
+          updateForm(activeTemplate.id, fieldId, 'x', newX);
+          updateForm(activeTemplate.id, fieldId, 'y', newY);
+        } else if (selectedElement.type === 'image') {
+          setImagePositions(prev => ({
+            ...prev,
+            [activeTemplate.id]: { x: newX, y: newY }
+          }));
+        }
+      } else if (dragMode === 'resize' && selectedElement.type === 'image') {
+        const imgSizeMap = {
+          cover: { w: 300, h: 220 },
+          performance: { w: 330, h: 210 },
+          interfaces: { w: 280, h: 180 },
+          rugged: { w: 310, h: 200 }
+        };
+        const baseW = imgSizeMap[activeTemplate.id].w;
+        const newW = x - dragStart.originalX;
+        // 等比缩放，比例计算为（当前宽度/基准宽度），范围限制为 10% - 300%
+        const newScale = Math.min(Math.max(Math.round((newW / baseW) * 100), 10), 300);
+        
+        setImageScales(prev => ({
+          ...prev,
+          [activeTemplate.id]: newScale
+        }));
+      }
+    }
+  };
+
+  const handleCanvasMouseUp = () => {
+    setIsDragging(false);
+    setDragStart(null);
+    setDragMode(null);
   };
 
   return (
@@ -856,7 +1254,14 @@ export default function App() {
           </div>
 
           {/* Section 3: Upload Product Image */}
-          <div className="bg-slate-850/40 border border-slate-850 p-4 rounded-2xl">
+          <div 
+            onClick={() => setSelectedElement({ type: 'image', id: 'product_image' })}
+            className={`p-4 rounded-2xl transition-all duration-300 border ${
+              selectedElement?.type === 'image' 
+                ? 'border-indigo-500 bg-indigo-500/5 shadow-[0_0_12px_rgba(79,70,229,0.15)]' 
+                : 'bg-slate-850/40 border-slate-850 hover:border-slate-750'
+            }`}
+          >
             <div className="flex justify-between items-center mb-3">
               <label className="text-xs font-bold text-slate-300 flex items-center gap-2">
                 <Upload className="w-4 h-4 text-sky-400" />
@@ -905,6 +1310,7 @@ export default function App() {
                     max="200"
                     value={imageScales[activeTemplate.id]}
                     onChange={(e) => setImageScales(prev => ({ ...prev, [activeTemplate.id]: Number(e.target.value) }))}
+                    onFocus={() => setSelectedElement({ type: 'image', id: 'product_image' })}
                     className="w-full h-1 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-indigo-500"
                   />
                   <span className="text-[10px] font-mono text-slate-400 w-8 text-right">{imageScales[activeTemplate.id]}%</span>
@@ -934,6 +1340,7 @@ export default function App() {
                             [activeTemplate.id]: { ...prev[activeTemplate.id], x: val }
                           }));
                         }}
+                        onFocus={() => setSelectedElement({ type: 'image', id: 'product_image' })}
                         className="w-9 text-center bg-slate-900 text-[10px] text-slate-200 border border-slate-850 py-0.5 rounded font-mono"
                       />
                       <button 
@@ -972,6 +1379,7 @@ export default function App() {
                             [activeTemplate.id]: { ...prev[activeTemplate.id], y: val }
                           }));
                         }}
+                        onFocus={() => setSelectedElement({ type: 'image', id: 'product_image' })}
                         className="w-9 text-center bg-slate-900 text-[10px] text-slate-200 border border-slate-850 py-0.5 rounded font-mono"
                       />
                       <button 
@@ -1017,7 +1425,15 @@ export default function App() {
                 const posY = formData[`${activeTemplate.id}_${field.id}_y`] ?? field.defaultY;
                 
                 return (
-                  <div key={field.id} className="bg-slate-850/50 border border-slate-850 p-3 rounded-xl hover:border-slate-750 transition duration-150">
+                  <div 
+                    key={field.id} 
+                    onClick={() => setSelectedElement({ type: 'text', id: field.id })}
+                    className={`p-3 rounded-xl transition duration-150 border ${
+                      selectedElement?.type === 'text' && selectedElement?.id === field.id
+                        ? 'border-indigo-500 bg-indigo-500/5 shadow-[0_0_12px_rgba(79,70,229,0.15)] animate-pulse-subtle'
+                        : 'bg-slate-850/50 border-slate-850 hover:border-slate-750'
+                    }`}
+                  >
                     <div className="flex justify-between items-center mb-1.5">
                       <span className="text-[11px] font-bold text-slate-300">{field.label}</span>
                       <span className="text-[9px] font-mono text-slate-500">#{field.id}</span>
@@ -1027,6 +1443,7 @@ export default function App() {
                       <textarea
                         value={val}
                         onChange={(e) => updateForm(activeTemplate.id, field.id, 'value', e.target.value)}
+                        onFocus={() => setSelectedElement({ type: 'text', id: field.id })}
                         className="w-full p-2 bg-slate-900 border border-slate-800 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500 text-xs font-sans text-slate-200 placeholder-slate-700 mb-2"
                         rows={3}
                       />
@@ -1035,6 +1452,7 @@ export default function App() {
                         type="text"
                         value={val}
                         onChange={(e) => updateForm(activeTemplate.id, field.id, 'value', e.target.value)}
+                        onFocus={() => setSelectedElement({ type: 'text', id: field.id })}
                         className="w-full p-2 bg-slate-900 border border-slate-800 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500 text-xs text-slate-200 placeholder-slate-700 mb-2"
                       />
                     )}
@@ -1226,6 +1644,10 @@ export default function App() {
               <canvas 
                 ref={canvasRef} 
                 className="block shadow-inner w-full h-full object-contain"
+                onMouseDown={handleCanvasMouseDown}
+                onMouseMove={handleCanvasMouseMove}
+                onMouseUp={handleCanvasMouseUp}
+                onMouseLeave={handleCanvasMouseUp}
               ></canvas>
             </div>
           </div>
