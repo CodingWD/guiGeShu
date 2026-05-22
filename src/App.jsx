@@ -51,14 +51,11 @@ const TEMPLATES = [
     id: 'interfaces',
     name: '图3：丰富接口 (对应 09.jpg)',
     themeColor: 'from-blue-50 to-sky-200',
-    description: '产品左侧大图，右侧带指向性线段标注关键接口',
+    description: '丰富接口展示版式，产品图自带标注',
     fields: [
       { id: 'title', label: '主标题', default: 'Rich Interfaces', defaultSize: 46, defaultLh: 50, isBold: true, color: '#000000', defaultX: 400, defaultY: 90 },
       { id: 'subtitle', label: '蓝字副标题', default: 'Meet different application needs', defaultSize: 22, defaultLh: 30, isBold: false, color: '#4a9af8', defaultX: 400, defaultY: 140 },
-      { id: 'desc', label: '段落描述 (按回车换行)', default: 'The front panel includes 1 HDMI, resolution up to\n3840 x 2160@30Hz, 2 Gigabit Ethernet interfaces\ncontrolled by independent chips. 4 serial ports,\n4 USB interfaces. Besides, 2 CAN are optional.', isMultiline: true, defaultSize: 13, defaultLh: 22, isBold: false, color: '#444444', defaultX: 400, defaultY: 190 },
-      { id: 'callout1', label: '引脚标注 1 (左上)', default: '2 GbE LAN', defaultSize: 14, defaultLh: 20, isBold: false, color: '#333', defaultX: 60, defaultY: 80 },
-      { id: 'callout2', label: '引脚标注 2 (右上)', default: '4 USB', defaultSize: 14, defaultLh: 20, isBold: false, color: '#333', defaultX: 250, defaultY: 80 },
-      { id: 'callout3', label: '引脚标注 3 (底部)', default: '4 COM', defaultSize: 14, defaultLh: 20, isBold: false, color: '#333', defaultX: 160, defaultY: 340 }
+      { id: 'desc', label: '段落描述 (按回车换行)', default: 'The front panel includes 1 HDMI, resolution up to\n3840 x 2160@30Hz, 2 Gigabit Ethernet interfaces\ncontrolled by independent chips. 4 serial ports,\n4 USB interfaces. Besides, 2 CAN are optional.', isMultiline: true, defaultSize: 13, defaultLh: 22, isBold: false, color: '#444444', defaultX: 400, defaultY: 190 }
     ]
   },
   {
@@ -452,24 +449,6 @@ export default function App() {
       drawExactText(ctx, tplId, tpl.fields.find(f=>f.id==='desc'));
 
       drawImageAspect(ctx, img, 50, 120, 280, 180, scalePerc);
-
-      ctx.strokeStyle = '#4a9af8';
-      ctx.lineWidth = 1;
-      
-      const c1_x = formData[`${tplId}_callout1_x`] ?? tpl.fields.find(f=>f.id==='callout1').defaultX;
-      const c1_y = formData[`${tplId}_callout1_y`] ?? tpl.fields.find(f=>f.id==='callout1').defaultY;
-      drawExactText(ctx, tplId, tpl.fields.find(f=>f.id==='callout1'));
-      ctx.beginPath(); ctx.moveTo(c1_x + 30, c1_y + 5); ctx.lineTo(c1_x + 30, c1_y + 40); ctx.stroke();
-      
-      const c2_x = formData[`${tplId}_callout2_x`] ?? tpl.fields.find(f=>f.id==='callout2').defaultX;
-      const c2_y = formData[`${tplId}_callout2_y`] ?? tpl.fields.find(f=>f.id==='callout2').defaultY;
-      drawExactText(ctx, tplId, tpl.fields.find(f=>f.id==='callout2'));
-      ctx.beginPath(); ctx.moveTo(c2_x + 20, c2_y + 5); ctx.lineTo(c2_x + 20, c2_y + 40); ctx.stroke();
-      
-      const c3_x = formData[`${tplId}_callout3_x`] ?? tpl.fields.find(f=>f.id==='callout3').defaultX;
-      const c3_y = formData[`${tplId}_callout3_y`] ?? tpl.fields.find(f=>f.id==='callout3').defaultY;
-      drawExactText(ctx, tplId, tpl.fields.find(f=>f.id==='callout3'));
-      ctx.beginPath(); ctx.moveTo(c3_x + 20, c3_y - 15); ctx.lineTo(c3_x + 20, c3_y - 40); ctx.stroke();
 
     } else if (tplId === 'rugged') {
       const leftBg = ctx.createLinearGradient(0, 0, 400, 400);
