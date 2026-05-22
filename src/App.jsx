@@ -88,11 +88,19 @@ const initData = () => {
   return data;
 };
 
+const DEFAULT_IMAGE_POSITIONS = {
+  cover: { x: 40, y: 90 },
+  performance: { x: 380, y: 110 },
+  interfaces: { x: 50, y: 120 },
+  rugged: { x: 370, y: 100 }
+};
+
 export default function App() {
   const [activeTemplate, setActiveTemplate] = useState(TEMPLATES[0]);
   const [formData, setFormData] = useState(initData());
   const [productImages, setProductImages] = useState({}); 
   const [imageScales, setImageScales] = useState({ cover: 100, performance: 100, interfaces: 100, rugged: 100 }); 
+  const [imagePositions, setImagePositions] = useState({ ...DEFAULT_IMAGE_POSITIONS });
   
   // AI 助手状态
   const [pdfBase64, setPdfBase64] = useState(null);
@@ -134,6 +142,14 @@ export default function App() {
       });
       return updated;
     });
+    setImagePositions(prev => ({
+      ...prev,
+      [tplId]: { ...DEFAULT_IMAGE_POSITIONS[tplId] }
+    }));
+    setImageScales(prev => ({
+      ...prev,
+      [tplId]: 100
+    }));
   };
 
   // 处理 PDF 上传解析 (优化原生调用)
@@ -401,7 +417,7 @@ export default function App() {
       drawExactText(ctx, tplId, tpl.fields.find(f=>f.id==='title'));
       drawExactText(ctx, tplId, tpl.fields.find(f=>f.id==='subtitle'));
 
-      drawImageAspect(ctx, img, 40, 90, 300, 220, scalePerc);
+      drawImageAspect(ctx, img, imagePositions[tplId].x, imagePositions[tplId].y, 300, 220, scalePerc);
 
     } else if (tplId === 'performance') {
       const bgGradient = ctx.createLinearGradient(0, 0, 750, 400);
@@ -426,7 +442,7 @@ export default function App() {
       drawExactText(ctx, tplId, tpl.fields.find(f=>f.id==='bullet1'));
       drawExactText(ctx, tplId, tpl.fields.find(f=>f.id==='bullet2'));
 
-      drawImageAspect(ctx, img, 380, 110, 330, 210, scalePerc);
+      drawImageAspect(ctx, img, imagePositions[tplId].x, imagePositions[tplId].y, 330, 210, scalePerc);
 
     } else if (tplId === 'interfaces') {
       const bg = ctx.createLinearGradient(0, 0, 750, 400);
@@ -448,7 +464,7 @@ export default function App() {
       drawExactText(ctx, tplId, tpl.fields.find(f=>f.id==='subtitle'));
       drawExactText(ctx, tplId, tpl.fields.find(f=>f.id==='desc'));
 
-      drawImageAspect(ctx, img, 50, 120, 280, 180, scalePerc);
+      drawImageAspect(ctx, img, imagePositions[tplId].x, imagePositions[tplId].y, 280, 180, scalePerc);
 
     } else if (tplId === 'rugged') {
       const leftBg = ctx.createLinearGradient(0, 0, 400, 400);
@@ -493,7 +509,7 @@ export default function App() {
       ctx.fillStyle = '#000000'; ctx.font = 'bold 36px Arial';
       ctx.fillText('CE  FC', 220, 335);
 
-      drawImageAspect(ctx, img, 370, 100, 310, 200, scalePerc);
+      drawImageAspect(ctx, img, imagePositions[tplId].x, imagePositions[tplId].y, 310, 200, scalePerc);
       
       ctx.fillStyle = 'rgba(255,255,255,0.4)';
       for(let i=0; i<30; i++) {
@@ -517,7 +533,7 @@ export default function App() {
     
     renderTemplateToCanvas(ctx, activeTemplate, formData, productImages[activeTemplate.id], imageScales[activeTemplate.id]);
 
-  }, [activeTemplate, formData, productImages, imageScales, canvasGrid]);
+  }, [activeTemplate, formData, productImages, imageScales, canvasGrid, imagePositions]);
 
   const handleDownloadSingle = () => {
     const canvas = canvasRef.current;
@@ -839,19 +855,99 @@ export default function App() {
               </div>
             </div>
 
-            {/* Scale control */}
+            {/* Scale & Position controls */}
             {productImages[activeTemplate.id] && (
-              <div className="mt-3 pt-3 border-t border-slate-800/80 flex items-center gap-3">
-                <span className="text-[10px] font-semibold text-slate-400 whitespace-nowrap">缩放:</span>
-                <input
-                  type="range"
-                  min="30"
-                  max="200"
-                  value={imageScales[activeTemplate.id]}
-                  onChange={(e) => setImageScales(prev => ({ ...prev, [activeTemplate.id]: Number(e.target.value) }))}
-                  className="w-full h-1 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-indigo-500"
-                />
-                <span className="text-[10px] font-mono text-slate-400 w-8 text-right">{imageScales[activeTemplate.id]}%</span>
+              <div className="space-y-3 mt-3 pt-3 border-t border-slate-800/80">
+                <div className="flex items-center gap-3">
+                  <span className="text-[10px] font-semibold text-slate-400 whitespace-nowrap">缩放:</span>
+                  <input
+                    type="range"
+                    min="30"
+                    max="200"
+                    value={imageScales[activeTemplate.id]}
+                    onChange={(e) => setImageScales(prev => ({ ...prev, [activeTemplate.id]: Number(e.target.value) }))}
+                    className="w-full h-1 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-indigo-500"
+                  />
+                  <span className="text-[10px] font-mono text-slate-400 w-8 text-right">{imageScales[activeTemplate.id]}%</span>
+                </div>
+
+                <div className="grid grid-cols-2 gap-3 pt-2 border-t border-slate-900/40">
+                  <div className="flex items-center justify-between gap-1">
+                    <span className="text-[9px] text-slate-500 font-semibold uppercase">图片 X:</span>
+                    <div className="flex items-center gap-0.5">
+                      <button 
+                        onClick={() => setImagePositions(prev => ({
+                          ...prev,
+                          [activeTemplate.id]: { ...prev[activeTemplate.id], x: prev[activeTemplate.id].x - 5 }
+                        }))} 
+                        className="p-0.5 bg-slate-800 hover:bg-slate-700 text-indigo-400 rounded"
+                        title="向左移动 5px"
+                      >
+                        <Minus className="w-2.5 h-2.5" />
+                      </button>
+                      <input 
+                        type="number" 
+                        value={imagePositions[activeTemplate.id]?.x ?? DEFAULT_IMAGE_POSITIONS[activeTemplate.id].x} 
+                        onChange={(e) => {
+                          const val = Number(e.target.value);
+                          setImagePositions(prev => ({
+                            ...prev,
+                            [activeTemplate.id]: { ...prev[activeTemplate.id], x: val }
+                          }));
+                        }}
+                        className="w-9 text-center bg-slate-900 text-[10px] text-slate-200 border border-slate-850 py-0.5 rounded font-mono"
+                      />
+                      <button 
+                        onClick={() => setImagePositions(prev => ({
+                          ...prev,
+                          [activeTemplate.id]: { ...prev[activeTemplate.id], x: prev[activeTemplate.id].x + 5 }
+                        }))} 
+                        className="p-0.5 bg-slate-800 hover:bg-slate-700 text-indigo-400 rounded"
+                        title="向右移动 5px"
+                      >
+                        <Plus className="w-2.5 h-2.5" />
+                      </button>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center justify-between gap-1">
+                    <span className="text-[9px] text-slate-500 font-semibold uppercase">图片 Y:</span>
+                    <div className="flex items-center gap-0.5">
+                      <button 
+                        onClick={() => setImagePositions(prev => ({
+                          ...prev,
+                          [activeTemplate.id]: { ...prev[activeTemplate.id], y: prev[activeTemplate.id].y - 5 }
+                        }))} 
+                        className="p-0.5 bg-slate-800 hover:bg-slate-700 text-indigo-400 rounded"
+                        title="向上移动 5px"
+                      >
+                        <Minus className="w-2.5 h-2.5" />
+                      </button>
+                      <input 
+                        type="number" 
+                        value={imagePositions[activeTemplate.id]?.y ?? DEFAULT_IMAGE_POSITIONS[activeTemplate.id].y} 
+                        onChange={(e) => {
+                          const val = Number(e.target.value);
+                          setImagePositions(prev => ({
+                            ...prev,
+                            [activeTemplate.id]: { ...prev[activeTemplate.id], y: val }
+                          }));
+                        }}
+                        className="w-9 text-center bg-slate-900 text-[10px] text-slate-200 border border-slate-850 py-0.5 rounded font-mono"
+                      />
+                      <button 
+                        onClick={() => setImagePositions(prev => ({
+                          ...prev,
+                          [activeTemplate.id]: { ...prev[activeTemplate.id], y: prev[activeTemplate.id].y + 5 }
+                        }))} 
+                        className="p-0.5 bg-slate-800 hover:bg-slate-700 text-indigo-400 rounded"
+                        title="向下移动 5px"
+                      >
+                        <Plus className="w-2.5 h-2.5" />
+                      </button>
+                    </div>
+                  </div>
+                </div>
               </div>
             )}
           </div>
