@@ -88,6 +88,13 @@ const initData = () => {
   return data;
 };
 
+// 宣传图规格尺寸预设
+const RESOLUTIONS = [
+  { id: '750x400', name: '默认规格 (750 × 400)', width: 750, height: 400 },
+  { id: '1920x820', name: '宽屏大图 (1920 × 820)', width: 1920, height: 820 },
+  { id: '1000x1000', name: '方形主图 (1000 × 1000)', width: 1000, height: 1000 }
+];
+
 const DEFAULT_IMAGE_POSITIONS = {
   cover: { x: 40, y: 90 },
   performance: { x: 380, y: 110 },
@@ -97,6 +104,7 @@ const DEFAULT_IMAGE_POSITIONS = {
 
 export default function App() {
   const [activeTemplate, setActiveTemplate] = useState(TEMPLATES[0]);
+  const [selectedRes, setSelectedRes] = useState(RESOLUTIONS[0]);
   const [formData, setFormData] = useState(initData());
   const [productImages, setProductImages] = useState({}); 
   const [imageScales, setImageScales] = useState({ cover: 100, performance: 100, interfaces: 100, rugged: 100 }); 
@@ -304,49 +312,54 @@ export default function App() {
     ctx.closePath();
   };
 
-  const drawImageAspect = (ctx, img, x, y, w, h, scalePerc = 100) => {
+  const drawImageAspect = (ctx, img, x, y, w, h, scalePerc = 100, scaleX = 1, scaleY = 1) => {
+    const scaledX = x * scaleX;
+    const scaledY = y * scaleY;
+    const scaledW = w * scaleX;
+    const scaledH = h * scaleY;
+
     if (!img) {
       // 占位图设计，使用高端玻璃卡片感
       ctx.save();
       ctx.fillStyle = 'rgba(255, 255, 255, 0.15)';
-      drawRoundedRect(ctx, x, y, w, h, 12);
+      drawRoundedRect(ctx, scaledX, scaledY, scaledW, scaledH, 12 * scaleY);
       ctx.fill();
       
       ctx.strokeStyle = 'rgba(255, 255, 255, 0.25)';
-      ctx.lineWidth = 1.5;
-      ctx.setLineDash([6, 4]);
+      ctx.lineWidth = 1.5 * scaleY;
+      ctx.setLineDash([6 * scaleY, 4 * scaleY]);
       ctx.stroke();
       
       ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
-      ctx.font = '13px "Segoe UI", sans-serif';
+      ctx.font = `${Math.round(13 * scaleY)}px "Segoe UI", sans-serif`;
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
-      ctx.fillText('📤 上传产品图 (PNG免抠最佳)', x + w / 2, y + h / 2);
+      ctx.fillText('📤 上传产品图 (PNG免抠最佳)', scaledX + scaledW / 2, scaledY + scaledH / 2);
       ctx.restore();
       return;
     }
     const imgRatio = img.width / img.height;
-    const boxRatio = w / h;
-    let drawW = w;
-    let drawH = h;
+    const boxRatio = scaledW / scaledH;
+    let drawW = scaledW;
+    let drawH = scaledH;
     
     if (imgRatio > boxRatio) {
-      drawH = w / imgRatio;
+      drawH = scaledW / imgRatio;
     } else {
-      drawW = h * imgRatio;
+      drawW = scaledH * imgRatio;
     }
 
     const scale = scalePerc / 100;
     const finalW = drawW * scale;
     const finalH = drawH * scale;
 
-    const finalX = x + (w - finalW) / 2;
-    const finalY = y + (h - finalH) / 2;
+    const finalX = scaledX + (scaledW - finalW) / 2;
+    const finalY = scaledY + (scaledH - finalH) / 2;
 
     ctx.drawImage(img, finalX, finalY, finalW, finalH);
   };
 
-  const drawExactText = (ctx, tplId, field) => {
+  const drawExactText = (ctx, tplId, field, scaleX = 1, scaleY = 1, scaleText = 1) => {
     if (!field) return;
     const text = formData[`${tplId}_${field.id}`] || '';
     const size = formData[`${tplId}_${field.id}_size`] || field.defaultSize;
@@ -354,173 +367,187 @@ export default function App() {
     const x = formData[`${tplId}_${field.id}_x`] ?? field.defaultX;
     const y = formData[`${tplId}_${field.id}_y`] ?? field.defaultY;
     
+    const scaledSize = Math.round(size * scaleText);
+    const scaledLh = Math.round(lh * scaleText);
+    const scaledX = x * scaleX;
+    const scaledY = y * scaleY;
+
     ctx.fillStyle = field.color;
-    ctx.font = `${field.isBold ? 'bold ' : ''}${size}px "Segoe UI", "Microsoft YaHei", sans-serif`;
+    ctx.font = `${field.isBold ? 'bold ' : ''}${scaledSize}px "Segoe UI", "Microsoft YaHei", sans-serif`;
     
     const lines = text.split('\\n').join('\n').split('\n');
     lines.forEach((line, index) => {
-      ctx.fillText(line, x, y + (index * lh));
+      ctx.fillText(line, scaledX, scaledY + (index * scaledLh));
     });
   };
 
-  const drawGrid = (ctx) => {
+  const drawGrid = (ctx, scaleX = 1, scaleY = 1, width = 750, height = 400) => {
     ctx.save();
     ctx.strokeStyle = 'rgba(239, 68, 68, 0.15)';
-    ctx.lineWidth = 0.5;
+    ctx.lineWidth = 0.5 * scaleY;
     
     // 画横线
     for (let y = 50; y < 400; y += 50) {
+      const scaledY = y * scaleY;
       ctx.beginPath();
-      ctx.moveTo(0, y);
-      ctx.lineTo(750, y);
+      ctx.moveTo(0, scaledY);
+      ctx.lineTo(width, scaledY);
       ctx.stroke();
       ctx.fillStyle = 'rgba(239, 68, 68, 0.4)';
-      ctx.font = '9px monospace';
-      ctx.fillText(y, 5, y - 2);
+      ctx.font = `${Math.round(9 * scaleY)}px monospace`;
+      ctx.fillText(y, 5 * scaleX, scaledY - 2 * scaleY);
     }
     
     // 画竖线
     for (let x = 50; x < 750; x += 50) {
+      const scaledX = x * scaleX;
       ctx.beginPath();
-      ctx.moveTo(x, 0);
-      ctx.lineTo(x, 400);
+      ctx.moveTo(scaledX, 0);
+      ctx.lineTo(scaledX, height);
       ctx.stroke();
       ctx.fillStyle = 'rgba(239, 68, 68, 0.4)';
-      ctx.font = '9px monospace';
-      ctx.fillText(x, x + 2, 10);
+      ctx.font = `${Math.round(9 * scaleY)}px monospace`;
+      ctx.fillText(x, scaledX + 2 * scaleX, 10 * scaleY);
     }
     ctx.restore();
   };
 
-  const renderTemplateToCanvas = (ctx, tpl, data, img, scalePerc) => {
+  const renderTemplateToCanvas = (ctx, tpl, data, img, scalePerc, width = 750, height = 400) => {
     const tplId = tpl.id;
-    ctx.clearRect(0, 0, 750, 400);
+    const scaleX = width / 750;
+    const scaleY = height / 400;
+    const scaleText = scaleY;
+
+    ctx.clearRect(0, 0, width, height);
 
     if (tplId === 'cover') {
-      const bgGradient = ctx.createLinearGradient(0, 0, 750, 400);
+      const bgGradient = ctx.createLinearGradient(0, 0, width, height);
       bgGradient.addColorStop(0, '#357ae1');
       bgGradient.addColorStop(1, '#92cbfd');
       ctx.fillStyle = bgGradient;
-      ctx.fillRect(0, 0, 750, 400);
+      ctx.fillRect(0, 0, width, height);
 
       ctx.save();
       ctx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
-      ctx.lineWidth = 1;
+      ctx.lineWidth = 1 * scaleY;
       for (let i = 0; i < 15; i++) {
         ctx.beginPath();
-        ctx.moveTo(0, 260 + i * 8);
-        ctx.bezierCurveTo(150, 280 + i * 5, 300, 320 + i * 10, 500, 400);
+        ctx.moveTo(0, (260 + i * 8) * scaleY);
+        ctx.bezierCurveTo(150 * scaleX, (280 + i * 5) * scaleY, 300 * scaleX, (320 + i * 10) * scaleY, 500 * scaleX, 400 * scaleY);
         ctx.stroke();
       }
       ctx.restore();
 
-      drawExactText(ctx, tplId, tpl.fields.find(f=>f.id==='title'));
-      drawExactText(ctx, tplId, tpl.fields.find(f=>f.id==='subtitle'));
+      drawExactText(ctx, tplId, tpl.fields.find(f=>f.id==='title'), scaleX, scaleY, scaleText);
+      drawExactText(ctx, tplId, tpl.fields.find(f=>f.id==='subtitle'), scaleX, scaleY, scaleText);
 
-      drawImageAspect(ctx, img, imagePositions[tplId].x, imagePositions[tplId].y, 300, 220, scalePerc);
+      drawImageAspect(ctx, img, imagePositions[tplId].x, imagePositions[tplId].y, 300, 220, scalePerc, scaleX, scaleY);
 
     } else if (tplId === 'performance') {
-      const bgGradient = ctx.createLinearGradient(0, 0, 750, 400);
+      const bgGradient = ctx.createLinearGradient(0, 0, width, height);
       bgGradient.addColorStop(0, '#d1eaff'); 
       bgGradient.addColorStop(1, '#a6d3ff'); 
       ctx.fillStyle = bgGradient;
-      ctx.fillRect(0, 0, 750, 400);
+      ctx.fillRect(0, 0, width, height);
 
       ctx.save();
       ctx.beginPath();
       ctx.moveTo(0, 0);
-      ctx.lineTo(750, 0);
-      ctx.bezierCurveTo(450, 150, 200, -50, 0, 180);
+      ctx.lineTo(750 * scaleX, 0);
+      ctx.bezierCurveTo(450 * scaleX, 150 * scaleY, 200 * scaleX, -50 * scaleY, 0, 180 * scaleY);
       ctx.closePath();
       ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
       ctx.fill();
       ctx.restore();
 
-      drawExactText(ctx, tplId, tpl.fields.find(f=>f.id==='title'));
-      drawExactText(ctx, tplId, tpl.fields.find(f=>f.id==='subtitle'));
-      drawExactText(ctx, tplId, tpl.fields.find(f=>f.id==='desc'));
-      drawExactText(ctx, tplId, tpl.fields.find(f=>f.id==='bullet1'));
-      drawExactText(ctx, tplId, tpl.fields.find(f=>f.id==='bullet2'));
+      drawExactText(ctx, tplId, tpl.fields.find(f=>f.id==='title'), scaleX, scaleY, scaleText);
+      drawExactText(ctx, tplId, tpl.fields.find(f=>f.id==='subtitle'), scaleX, scaleY, scaleText);
+      drawExactText(ctx, tplId, tpl.fields.find(f=>f.id==='desc'), scaleX, scaleY, scaleText);
+      drawExactText(ctx, tplId, tpl.fields.find(f=>f.id==='bullet1'), scaleX, scaleY, scaleText);
+      drawExactText(ctx, tplId, tpl.fields.find(f=>f.id==='bullet2'), scaleX, scaleY, scaleText);
 
-      drawImageAspect(ctx, img, imagePositions[tplId].x, imagePositions[tplId].y, 330, 210, scalePerc);
+      drawImageAspect(ctx, img, imagePositions[tplId].x, imagePositions[tplId].y, 330, 210, scalePerc, scaleX, scaleY);
 
     } else if (tplId === 'interfaces') {
-      const bg = ctx.createLinearGradient(0, 0, 750, 400);
+      const bg = ctx.createLinearGradient(0, 0, width, height);
       bg.addColorStop(0, '#eaf4fc');
       bg.addColorStop(1, '#bcdfff');
       ctx.fillStyle = bg;
-      ctx.fillRect(0, 0, 750, 400);
+      ctx.fillRect(0, 0, width, height);
 
       ctx.beginPath();
-      ctx.moveTo(350, 0);
-      ctx.lineTo(750, 0);
-      ctx.lineTo(750, 400);
-      ctx.lineTo(100, 400);
+      ctx.moveTo(350 * scaleX, 0);
+      ctx.lineTo(750 * scaleX, 0);
+      ctx.lineTo(750 * scaleX, 400 * scaleY);
+      ctx.lineTo(100 * scaleX, 400 * scaleY);
       ctx.closePath();
       ctx.fillStyle = 'rgba(120, 180, 255, 0.15)';
       ctx.fill();
 
-      drawExactText(ctx, tplId, tpl.fields.find(f=>f.id==='title'));
-      drawExactText(ctx, tplId, tpl.fields.find(f=>f.id==='subtitle'));
-      drawExactText(ctx, tplId, tpl.fields.find(f=>f.id==='desc'));
+      drawExactText(ctx, tplId, tpl.fields.find(f=>f.id==='title'), scaleX, scaleY, scaleText);
+      drawExactText(ctx, tplId, tpl.fields.find(f=>f.id==='subtitle'), scaleX, scaleY, scaleText);
+      drawExactText(ctx, tplId, tpl.fields.find(f=>f.id==='desc'), scaleX, scaleY, scaleText);
 
-      drawImageAspect(ctx, img, imagePositions[tplId].x, imagePositions[tplId].y, 280, 180, scalePerc);
+      drawImageAspect(ctx, img, imagePositions[tplId].x, imagePositions[tplId].y, 280, 180, scalePerc, scaleX, scaleY);
 
     } else if (tplId === 'rugged') {
-      const leftBg = ctx.createLinearGradient(0, 0, 400, 400);
+      const leftBg = ctx.createLinearGradient(0, 0, 400 * scaleX, 400 * scaleY);
       leftBg.addColorStop(0, '#f4f8fc'); leftBg.addColorStop(1, '#e3edf8');
       ctx.fillStyle = leftBg;
-      ctx.fillRect(0, 0, 750, 400);
+      ctx.fillRect(0, 0, width, height);
 
       ctx.fillStyle = '#101114';
-      ctx.fillRect(330, 55, 420, 290);
+      ctx.fillRect(330 * scaleX, 55 * scaleY, 420 * scaleX, 290 * scaleY);
 
-      drawExactText(ctx, tplId, tpl.fields.find(f=>f.id==='title'));
-      drawExactText(ctx, tplId, tpl.fields.find(f=>f.id==='subtitle'));
-      drawExactText(ctx, tplId, tpl.fields.find(f=>f.id==='desc'));
+      drawExactText(ctx, tplId, tpl.fields.find(f=>f.id==='title'), scaleX, scaleY, scaleText);
+      drawExactText(ctx, tplId, tpl.fields.find(f=>f.id==='subtitle'), scaleX, scaleY, scaleText);
+      drawExactText(ctx, tplId, tpl.fields.find(f=>f.id==='desc'), scaleX, scaleY, scaleText);
 
       ctx.save();
       ctx.shadowColor = 'rgba(0, 0, 0, 0.12)';
-      ctx.shadowBlur = 15;
-      ctx.shadowOffsetX = 5;
-      ctx.shadowOffsetY = 8;
+      ctx.shadowBlur = 15 * scaleY;
+      ctx.shadowOffsetX = 5 * scaleX;
+      ctx.shadowOffsetY = 8 * scaleY;
       
       ctx.fillStyle = 'rgba(248, 250, 252, 0.88)'; 
-      drawRoundedRect(ctx, 35, 265, 330, 95, 12);
+      drawRoundedRect(ctx, 35 * scaleX, 265 * scaleY, 330 * scaleX, 95 * scaleY, 12 * scaleY);
       ctx.fill();
       ctx.shadowColor = 'transparent'; 
       ctx.strokeStyle = '#ffffff';
-      ctx.lineWidth = 1.5;
+      ctx.lineWidth = 1.5 * scaleY;
       ctx.stroke();
       ctx.restore();
 
       const size1_x = formData[`${tplId}_sizeOverall_x`] ?? tpl.fields.find(f=>f.id==='sizeOverall').defaultX;
       const size1_y = formData[`${tplId}_sizeOverall_y`] ?? tpl.fields.find(f=>f.id==='sizeOverall').defaultY;
-      ctx.fillStyle = '#7a8599'; ctx.font = '12px Arial';
-      ctx.fillText('Overall size', size1_x, size1_y - 25);
-      drawExactText(ctx, tplId, tpl.fields.find(f=>f.id==='sizeOverall'));
+      ctx.fillStyle = '#7a8599'; 
+      ctx.font = `${Math.round(12 * scaleText)}px Arial`;
+      ctx.fillText('Overall size', size1_x * scaleX, (size1_y - 25) * scaleY);
+      drawExactText(ctx, tplId, tpl.fields.find(f=>f.id==='sizeOverall'), scaleX, scaleY, scaleText);
       
       const size2_x = formData[`${tplId}_sizeBoard_x`] ?? tpl.fields.find(f=>f.id==='sizeBoard').defaultX;
       const size2_y = formData[`${tplId}_sizeBoard_y`] ?? tpl.fields.find(f=>f.id==='sizeBoard').defaultY;
-      ctx.fillStyle = '#7a8599'; ctx.font = '12px Arial';
-      ctx.fillText('Motherboard size', size2_x, size2_y - 15);
-      drawExactText(ctx, tplId, tpl.fields.find(f=>f.id==='sizeBoard'));
+      ctx.fillStyle = '#7a8599'; 
+      ctx.font = `${Math.round(12 * scaleText)}px Arial`;
+      ctx.fillText('Motherboard size', size2_x * scaleX, (size2_y - 15) * scaleY);
+      drawExactText(ctx, tplId, tpl.fields.find(f=>f.id==='sizeBoard'), scaleX, scaleY, scaleText);
 
-      ctx.fillStyle = '#000000'; ctx.font = 'bold 36px Arial';
-      ctx.fillText('CE  FC', 220, 335);
+      ctx.fillStyle = '#000000'; 
+      ctx.font = `bold ${Math.round(36 * scaleText)}px Arial`;
+      ctx.fillText('CE  FC', 220 * scaleX, 335 * scaleY);
 
-      drawImageAspect(ctx, img, imagePositions[tplId].x, imagePositions[tplId].y, 310, 200, scalePerc);
+      drawImageAspect(ctx, img, imagePositions[tplId].x, imagePositions[tplId].y, 310, 200, scalePerc, scaleX, scaleY);
       
       ctx.fillStyle = 'rgba(255,255,255,0.4)';
       for(let i=0; i<30; i++) {
         ctx.beginPath();
-        ctx.arc(600 + Math.random()*150, 200 + Math.random()*140, Math.random()*1.5, 0, Math.PI*2);
+        ctx.arc((600 + Math.random()*150) * scaleX, (200 + Math.random()*140) * scaleY, Math.random()*1.5 * scaleY, 0, Math.PI*2);
         ctx.fill();
       }
     }
 
     if (canvasGrid) {
-      drawGrid(ctx);
+      drawGrid(ctx, scaleX, scaleY, width, height);
     }
   };
 
@@ -528,18 +555,18 @@ export default function App() {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
-    canvas.width = 750;
-    canvas.height = 400;
+    canvas.width = selectedRes.width;
+    canvas.height = selectedRes.height;
     
-    renderTemplateToCanvas(ctx, activeTemplate, formData, productImages[activeTemplate.id], imageScales[activeTemplate.id]);
+    renderTemplateToCanvas(ctx, activeTemplate, formData, productImages[activeTemplate.id], imageScales[activeTemplate.id], selectedRes.width, selectedRes.height);
 
-  }, [activeTemplate, formData, productImages, imageScales, canvasGrid, imagePositions]);
+  }, [activeTemplate, formData, productImages, imageScales, canvasGrid, imagePositions, selectedRes]);
 
   const handleDownloadSingle = () => {
     const canvas = canvasRef.current;
     const url = canvas.toDataURL('image/png', 1.0);
     const link = document.createElement('a');
-    link.download = `yantronic_${activeTemplate.id}_750x400.png`;
+    link.download = `yantronic_${activeTemplate.id}_${selectedRes.width}x${selectedRes.height}.png`;
     link.href = url;
     link.click();
   };
@@ -549,15 +576,15 @@ export default function App() {
     try {
       for (const tpl of TEMPLATES) {
         const tempCanvas = document.createElement('canvas');
-        tempCanvas.width = 750;
-        tempCanvas.height = 400;
+        tempCanvas.width = selectedRes.width;
+        tempCanvas.height = selectedRes.height;
         const tempCtx = tempCanvas.getContext('2d');
         
-        renderTemplateToCanvas(tempCtx, tpl, formData, productImages[tpl.id], imageScales[tpl.id]);
+        renderTemplateToCanvas(tempCtx, tpl, formData, productImages[tpl.id], imageScales[tpl.id], selectedRes.width, selectedRes.height);
         
         const url = tempCanvas.toDataURL('image/png', 1.0);
         const link = document.createElement('a');
-        link.download = `yantronic_${tpl.id}_750x400.png`;
+        link.download = `yantronic_${tpl.id}_${selectedRes.width}x${selectedRes.height}.png`;
         link.href = url;
         link.click();
         
@@ -1118,17 +1145,33 @@ export default function App() {
       <div className="flex-1 bg-slate-950 p-6 lg:p-8 flex flex-col justify-between overflow-y-auto custom-scrollbar relative">
         
         {/* Header Preview bar */}
-        <div className="flex justify-between items-center mb-6">
-          <div className="flex items-center gap-2 bg-slate-900 border border-slate-800/80 px-4 py-1.5 rounded-full">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+          <div className="flex items-center gap-2 bg-slate-900 border border-slate-800/80 px-4 py-1.5 rounded-full shrink-0">
             <span className="w-2.5 h-2.5 rounded-full bg-indigo-500 animate-pulse-ring"></span>
             <span className="text-xs font-semibold text-slate-400">
               当前视图: <span className="text-slate-200">{activeTemplate.name}</span>
             </span>
-            <span className="text-[10px] text-slate-500 font-mono pl-2 border-l border-slate-800">750 x 400 PX</span>
+            <span className="text-[10px] text-slate-500 font-mono pl-2 border-l border-slate-800">{selectedRes.width} x {selectedRes.height} PX</span>
           </div>
 
-          {/* Grid Toggle / helpers */}
-          <div className="flex items-center gap-3">
+          {/* Resolution Tabs & Grid Toggle */}
+          <div className="flex flex-wrap items-center gap-3 w-full sm:w-auto sm:justify-end">
+            <div className="flex bg-slate-900 border border-slate-850 p-1 rounded-xl shrink-0">
+              {RESOLUTIONS.map(res => (
+                <button
+                  key={res.id}
+                  onClick={() => setSelectedRes(res)}
+                  className={`text-[10px] px-2.5 py-1 rounded-lg font-bold transition-all duration-200 ${
+                    selectedRes.id === res.id 
+                      ? 'bg-indigo-600 text-white shadow-md' 
+                      : 'text-slate-400 hover:text-slate-200'
+                  }`}
+                >
+                  {res.id === '750x400' ? '原版 750×400' : res.id === '1920x820' ? '宽屏 1920×820' : '方形 1000×1000'}
+                </button>
+              ))}
+            </div>
+
             <button
               onClick={() => setCanvasGrid(!canvasGrid)}
               className={`text-xs px-3 py-1.5 rounded-lg border font-semibold transition flex items-center gap-1.5 ${
@@ -1145,21 +1188,32 @@ export default function App() {
 
         {/* Canvas Area with high premium box shadows */}
         <div className="flex-1 flex items-center justify-center py-4">
-          <div className="relative p-3 bg-slate-900 border border-slate-800 rounded-2xl shadow-2xl transition-transform duration-300 max-w-full overflow-auto custom-scrollbar">
+          <div 
+            className="relative p-3 bg-slate-900 border border-slate-800 rounded-2xl shadow-2xl transition-all duration-300 max-w-full flex flex-col items-center"
+            style={{ 
+              width: '100%', 
+              maxWidth: selectedRes.id === '750x400' ? '780px' : selectedRes.id === '1000x1000' ? '540px' : '980px'
+            }}
+          >
             
             {/* Canvas Outer Screen mockup */}
-            <div className="absolute top-0 inset-x-0 h-4 bg-slate-850 rounded-t-lg flex items-center px-4 gap-1.5 pointer-events-none border-b border-slate-900">
+            <div className="w-full h-6 bg-slate-850 rounded-t-lg flex items-center px-4 gap-1.5 pointer-events-none border-b border-slate-900">
               <span className="w-1.5 h-1.5 rounded-full bg-rose-500"></span>
               <span className="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
               <span className="text-[8px] text-slate-500 font-mono ml-2">yantronic_marketing_builder_canvas.png</span>
             </div>
             
-            <div className="mt-4 border border-slate-850 rounded-lg overflow-hidden bg-slate-950">
+            <div 
+              className="w-full border border-slate-850 rounded-b-lg overflow-hidden bg-slate-950 flex items-center justify-center transition-all duration-300"
+              style={{ 
+                aspectRatio: `${selectedRes.width} / ${selectedRes.height}`,
+                maxHeight: '60vh'
+              }}
+            >
               <canvas 
                 ref={canvasRef} 
-                className="block shadow-inner"
-                style={{ width: '750px', height: '400px' }}
+                className="block shadow-inner w-full h-full object-contain"
               ></canvas>
             </div>
           </div>
@@ -1169,12 +1223,15 @@ export default function App() {
         <div className="mt-6 glass-panel border border-slate-800/40 p-4 rounded-xl max-w-2xl mx-auto flex items-start gap-3">
           <Info className="w-5 h-5 text-indigo-400 shrink-0 mt-0.5" />
           <div className="text-xs text-slate-400 leading-relaxed">
-            <h4 className="font-bold text-slate-200 mb-1">💡 快捷排版指南</h4>
+            <h4 className="font-bold text-slate-200 mb-1">💡 快捷排版指南与尺寸自适应</h4>
             <p>
               1. 每一个编辑版式的产品图均是<strong className="text-white">独立配置</strong>的。您可以切换左侧菜单依次上传各个页面的图片。
             </p>
             <p className="mt-1">
-              2. 文字排版（字号、行距、坐标）将实时保存。你可以使用 <strong className="text-indigo-400">X位置/Y位置</strong> 的加减按钮快速移动定位，或直接在文本框中使用 <strong className="text-indigo-400">\n</strong> 代表换行。
+              2. 界面坐标与字号参数**始终以 `750 × 400` 为基准配置**。在切换至 `1920 × 820` 等分辨率时，系统将**自动等比放大**所有文案与图像位置，无需重新微调。
+            </p>
+            <p className="mt-1">
+              3. 为保证大分辨率在屏幕内完美呈现，预览图已自适应缩放展示。**实际导出时将输出 100% 的无损高清规格大图**。
             </p>
           </div>
         </div>
