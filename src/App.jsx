@@ -102,6 +102,13 @@ const DEFAULT_IMAGE_POSITIONS = {
   rugged: { x: 370, y: 100 }
 };
 
+// 静态粒子数组以避免画布重绘时粒子闪烁跳动
+const STABLE_PARTICLES = Array.from({ length: 35 }, (_, i) => ({
+  xOffset: (i * 17 + 23) % 150,
+  yOffset: (i * 13 + 37) % 140,
+  r: ((i * 7 + 11) % 15) / 10 + 0.5 // 半径在 0.5 到 2.0 像素之间
+}));
+
 export default function App() {
   const [activeTemplate, setActiveTemplate] = useState(TEMPLATES[0]);
   const [selectedRes, setSelectedRes] = useState(RESOLUTIONS[0]);
@@ -712,11 +719,11 @@ export default function App() {
       drawImageAspect(ctx, img, imagePositions[tplId].x, imagePositions[tplId].y, 310, 200, scalePerc, scaleX, scaleY);
       
       ctx.fillStyle = 'rgba(255,255,255,0.4)';
-      for(let i=0; i<30; i++) {
+      STABLE_PARTICLES.forEach(p => {
         ctx.beginPath();
-        ctx.arc((600 + Math.random()*150) * scaleX, (200 + Math.random()*140) * scaleY, Math.random()*1.5 * scaleY, 0, Math.PI*2);
+        ctx.arc((600 + p.xOffset) * scaleX, (200 + p.yOffset) * scaleY, p.r * scaleY, 0, Math.PI * 2);
         ctx.fill();
-      }
+      });
     }
 
     // 只有在非导出状态下，才绘制选中/悬停虚线框及手柄
@@ -1007,6 +1014,73 @@ export default function App() {
     setDragStart(null);
     setDragMode(null);
   };
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        setSelectedElement(null);
+        setHoveredElement(null);
+        return;
+      }
+
+      if (!selectedElement) return;
+      
+      // Avoid nudging when typing in text inputs or textareas
+      if (document.activeElement && (
+        document.activeElement.tagName === 'INPUT' || 
+        document.activeElement.tagName === 'TEXTAREA'
+      )) {
+        return;
+      }
+
+      let nudgeX = 0;
+      let nudgeY = 0;
+
+      if (e.key === 'ArrowUp') {
+        nudgeY = -1;
+      } else if (e.key === 'ArrowDown') {
+        nudgeY = 1;
+      } else if (e.key === 'ArrowLeft') {
+        nudgeX = -1;
+      } else if (e.key === 'ArrowRight') {
+        nudgeX = 1;
+      } else {
+        return;
+      }
+
+      // Shift key nudges by 5px, otherwise 1px
+      const amount = e.shiftKey ? 5 : 1;
+      nudgeX *= amount;
+      nudgeY *= amount;
+
+      e.preventDefault();
+
+      if (selectedElement.type === 'text') {
+        const fieldId = selectedElement.id;
+        const currentX = formData[`${activeTemplate.id}_${fieldId}_x`] ?? activeTemplate.fields.find(f => f.id === fieldId).defaultX;
+        const currentY = formData[`${activeTemplate.id}_${fieldId}_y`] ?? activeTemplate.fields.find(f => f.id === fieldId).defaultY;
+        
+        updateForm(activeTemplate.id, fieldId, 'x', currentX + nudgeX);
+        updateForm(activeTemplate.id, fieldId, 'y', currentY + nudgeY);
+      } else if (selectedElement.type === 'image') {
+        setImagePositions(prev => {
+          const currentPos = prev[activeTemplate.id] || DEFAULT_IMAGE_POSITIONS[activeTemplate.id];
+          return {
+            ...prev,
+            [activeTemplate.id]: {
+              x: currentPos.x + nudgeX,
+              y: currentPos.y + nudgeY
+            }
+          };
+        });
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [selectedElement, formData, activeTemplate]);
 
   return (
     <div className="flex flex-col lg:flex-row h-screen bg-slate-900 text-slate-100 font-sans antialiased overflow-hidden">
