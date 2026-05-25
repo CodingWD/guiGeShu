@@ -1,0 +1,595 @@
+- generic [ref=e3]:
+  - generic [ref=e4]:
+    - generic [ref=e5]:
+      - generic [ref=e6]:
+        - heading "Marketing Banner Maker" [level=1] [ref=e7]
+        - paragraph [ref=e8]: B2B 阿里国际站营销大图生成工具
+      - button "配置 API 密钥" [ref=e9]:
+        - img [ref=e10]
+    - generic [ref=e14]:
+      - generic [ref=e15]:
+        - generic [ref=e16]:
+          - img [ref=e18]
+          - heading "AI B2B 营销文案专家" [level=2] [ref=e21]
+        - paragraph [ref=e22]: 提供 PDF 规格书或产品核心参数，由 AI 自动生成地道 B2B 买家首选文案。
+        - generic [ref=e23]:
+          - generic [ref=e24]:
+            - generic [ref=e25]:
+              - img [ref=e26]
+              - text: "步骤 1: 上传产品 PDF 规格书"
+            - generic [ref=e29] [cursor=pointer]:
+              - button "Choose File" [ref=e30]
+              - img [ref=e31]
+              - text: 选择或拖拽 PDF
+          - generic [ref=e34]:
+            - generic [ref=e35]: "步骤 2 (可选): 补充或粘贴文字参数"
+            - textbox "Intel J3455, 8GB RAM, 4x COM, 2x LAN..." [ref=e36]
+          - button "生成当前【图4】文案" [ref=e1014]:
+            - img [ref=e38]
+            - text: 生成当前【图4】文案
+      - generic [ref=e41]:
+        - generic [ref=e42]:
+          - img [ref=e43]
+          - generic [ref=e45]:
+            - generic [ref=e46]: 1. 切换模板组与版式 (4 张)
+            - paragraph [ref=e47]: P101 系列工业触控一体机模板
+        - generic [ref=e48]:
+          - button "可扩展机器 4 张模板" [ref=e49]:
+            - generic [ref=e50]: 可扩展机器
+            - generic [ref=e51]: 4 张模板
+          - button "工业平板 4 张模板" [ref=e52]:
+            - generic [ref=e53]: 工业平板
+            - generic [ref=e54]: 4 张模板
+        - generic [ref=e55]:
+          - button "图1：封面展示 (对应 06.jpg) 居中标题与工业平板主视觉，适合作为工业平板首图" [ref=e299]:
+            - generic [ref=e303]:
+              - generic [ref=e304]: 图1：封面展示 (对应 06.jpg)
+              - generic [ref=e305]: 居中标题与工业平板主视觉，适合作为工业平板首图
+            - img [ref=e307]
+          - button "图2：性能展示 (对应 07.jpg) 双标题 + 左图右信息卡，适合突出芯片平台与运行性能" [ref=e309]:
+            - generic [ref=e313]:
+              - generic [ref=e314]: 图2：性能展示 (对应 07.jpg)
+              - generic [ref=e315]: 双标题 + 左图右信息卡，适合突出芯片平台与运行性能
+            - img [ref=e317]
+          - button "图3：触控与防护 (对应 08.jpg) 顶部三项能力标签 + 中部工业平板主图 + 底部蓝带卖点" [ref=e319]:
+            - generic [ref=e323]:
+              - generic [ref=e324]: 图3：触控与防护 (对应 08.jpg)
+              - generic [ref=e325]: 顶部三项能力标签 + 中部工业平板主图 + 底部蓝带卖点
+            - img [ref=e327]
+          - button "图4：接口扩展 (对应 09.jpg) 双标题 + 左侧接口清单 + 右侧深色科技图框，适合展示扩展能力" [active] [ref=e329]:
+            - generic [ref=e333]:
+              - generic [ref=e334]: 图4：接口扩展 (对应 09.jpg)
+              - generic [ref=e335]: 双标题 + 左侧接口清单 + 右侧深色科技图框，适合展示扩展能力
+            - img [ref=e337]
+      - generic [ref=e96]:
+        - generic [ref=e97]:
+          - generic [ref=e98]: 导出产品名
+          - generic [ref=e99]: "导出格式: `产品名-序号.jpg`"
+        - textbox "例如 P101-1G" [ref=e339]: P101-1G
+        - paragraph [ref=e101]: 当前页会导出为 P101-1G-4.jpg
+      - generic [ref=e102]:
+        - generic [ref=e104]:
+          - img [ref=e105]
+          - text: 2. 上传【当前版式】产品图
+        - generic [ref=e108] [cursor=pointer]:
+          - button "Choose File" [ref=e109]
+          - generic [ref=e110]:
+            - img [ref=e111]
+            - generic [ref=e114]: 选择产品 PNG 格式原图
+            - generic [ref=e115]: 支持透明背景免抠图片
+      - generic [ref=e116]:
+        - generic [ref=e117]:
+          - generic [ref=e118]:
+            - img [ref=e119]
+            - text: 3. 文本框编辑与版式微调
+          - generic [ref=e121]:
+            - button "新增文本框" [ref=e122]:
+              - img [ref=e123]
+              - text: 新增文本框
+            - button "重置当前页" [ref=e124]:
+              - img [ref=e125]
+              - text: 重置当前页
+        - generic [ref=e130]:
+          - generic [ref=e464]:
+            - generic [ref=e465]:
+              - generic [ref=e466]: 标题左
+              - generic [ref=e467]:
+                - generic [ref=e468]: "#titleLeft"
+                - button "隐藏文本框" [ref=e469]:
+                  - img [ref=e470]
+            - textbox [ref=e473]: 丰富接口
+            - generic [ref=e475]:
+              - generic [ref=e476]:
+                - generic [ref=e477]: 文字风格
+                - combobox [ref=e478]:
+                  - option "商务黑标题" [selected]
+                  - option "品牌蓝副标题"
+                  - option "说明深灰"
+                  - option "信息浅灰"
+                  - option "深底白字"
+              - generic [ref=e479]:
+                - generic [ref=e480]: 框内对齐
+                - combobox [ref=e481]:
+                  - option "左对齐"
+                  - option "居中" [selected]
+                  - option "右对齐"
+            - generic [ref=e482]:
+              - generic [ref=e483]:
+                - generic [ref=e484]:
+                  - generic [ref=e485]: "字号:"
+                  - generic [ref=e486]:
+                    - button [ref=e487]:
+                      - img [ref=e488]
+                    - spinbutton [ref=e489]: "38"
+                    - button [ref=e490]:
+                      - img [ref=e491]
+                - generic [ref=e492]:
+                  - generic [ref=e493]: "行距:"
+                  - generic [ref=e494]:
+                    - button [ref=e495]:
+                      - img [ref=e496]
+                    - spinbutton [ref=e497]: "42"
+                    - button [ref=e498]:
+                      - img [ref=e499]
+                - generic [ref=e500]:
+                  - generic [ref=e501]: "框宽:"
+                  - generic [ref=e502]:
+                    - button [ref=e503]:
+                      - img [ref=e504]
+                    - spinbutton [ref=e505]: "180"
+                    - button [ref=e506]:
+                      - img [ref=e507]
+              - generic [ref=e508]:
+                - generic [ref=e509]:
+                  - generic [ref=e510]: "X位置:"
+                  - generic [ref=e511]:
+                    - button "向左移动 5px" [ref=e512]:
+                      - img [ref=e513]
+                    - spinbutton [ref=e514]: "155"
+                    - button "向右移动 5px" [ref=e515]:
+                      - img [ref=e516]
+                - generic [ref=e517]:
+                  - generic [ref=e518]: "Y位置:"
+                  - generic [ref=e519]:
+                    - button "向上移动 5px" [ref=e520]:
+                      - img [ref=e521]
+                    - spinbutton [ref=e522]: "82"
+                    - button "向下移动 5px" [ref=e523]:
+                      - img [ref=e524]
+          - generic [ref=e525]:
+            - generic [ref=e526]:
+              - generic [ref=e527]: 标题右
+              - generic [ref=e528]:
+                - generic [ref=e529]: "#titleRight"
+                - button "隐藏文本框" [ref=e530]:
+                  - img [ref=e531]
+            - textbox [ref=e534]: 畅享扩展
+            - generic [ref=e536]:
+              - generic [ref=e537]:
+                - generic [ref=e538]: 文字风格
+                - combobox [ref=e539]:
+                  - option "商务黑标题" [selected]
+                  - option "品牌蓝副标题"
+                  - option "说明深灰"
+                  - option "信息浅灰"
+                  - option "深底白字"
+              - generic [ref=e540]:
+                - generic [ref=e541]: 框内对齐
+                - combobox [ref=e542]:
+                  - option "左对齐"
+                  - option "居中" [selected]
+                  - option "右对齐"
+            - generic [ref=e543]:
+              - generic [ref=e544]:
+                - generic [ref=e545]:
+                  - generic [ref=e546]: "字号:"
+                  - generic [ref=e547]:
+                    - button [ref=e548]:
+                      - img [ref=e549]
+                    - spinbutton [ref=e550]: "38"
+                    - button [ref=e551]:
+                      - img [ref=e552]
+                - generic [ref=e553]:
+                  - generic [ref=e554]: "行距:"
+                  - generic [ref=e555]:
+                    - button [ref=e556]:
+                      - img [ref=e557]
+                    - spinbutton [ref=e558]: "42"
+                    - button [ref=e559]:
+                      - img [ref=e560]
+                - generic [ref=e561]:
+                  - generic [ref=e562]: "框宽:"
+                  - generic [ref=e563]:
+                    - button [ref=e564]:
+                      - img [ref=e565]
+                    - spinbutton [ref=e566]: "180"
+                    - button [ref=e567]:
+                      - img [ref=e568]
+              - generic [ref=e569]:
+                - generic [ref=e570]:
+                  - generic [ref=e571]: "X位置:"
+                  - generic [ref=e572]:
+                    - button "向左移动 5px" [ref=e573]:
+                      - img [ref=e574]
+                    - spinbutton [ref=e575]: "420"
+                    - button "向右移动 5px" [ref=e576]:
+                      - img [ref=e577]
+                - generic [ref=e578]:
+                  - generic [ref=e579]: "Y位置:"
+                  - generic [ref=e580]:
+                    - button "向上移动 5px" [ref=e581]:
+                      - img [ref=e582]
+                    - spinbutton [ref=e583]: "82"
+                    - button "向下移动 5px" [ref=e584]:
+                      - img [ref=e585]
+          - generic [ref=e1015]:
+            - generic [ref=e1016]:
+              - generic [ref=e1017]: 接口 1
+              - generic [ref=e1018]:
+                - generic [ref=e1019]: "#bullet1"
+                - button "隐藏文本框" [ref=e1020]:
+                  - img [ref=e1021]
+            - textbox [ref=e1024]: ● 3 LAN
+            - generic [ref=e1026]:
+              - generic [ref=e1027]:
+                - generic [ref=e1028]: 文字风格
+                - combobox [ref=e1029]:
+                  - option "商务黑标题" [selected]
+                  - option "品牌蓝副标题"
+                  - option "说明深灰"
+                  - option "信息浅灰"
+                  - option "深底白字"
+              - generic [ref=e1030]:
+                - generic [ref=e1031]: 框内对齐
+                - combobox [ref=e1032]:
+                  - option "左对齐" [selected]
+                  - option "居中"
+                  - option "右对齐"
+            - generic [ref=e1033]:
+              - generic [ref=e1034]:
+                - generic [ref=e1035]:
+                  - generic [ref=e1036]: "字号:"
+                  - generic [ref=e1037]:
+                    - button [ref=e1038]:
+                      - img [ref=e1039]
+                    - spinbutton [ref=e1040]: "20"
+                    - button [ref=e1041]:
+                      - img [ref=e1042]
+                - generic [ref=e1043]:
+                  - generic [ref=e1044]: "行距:"
+                  - generic [ref=e1045]:
+                    - button [ref=e1046]:
+                      - img [ref=e1047]
+                    - spinbutton [ref=e1048]: "24"
+                    - button [ref=e1049]:
+                      - img [ref=e1050]
+                - generic [ref=e1051]:
+                  - generic [ref=e1052]: "框宽:"
+                  - generic [ref=e1053]:
+                    - button [ref=e1054]:
+                      - img [ref=e1055]
+                    - spinbutton [ref=e1056]: "300"
+                    - button [ref=e1057]:
+                      - img [ref=e1058]
+              - generic [ref=e1059]:
+                - generic [ref=e1060]:
+                  - generic [ref=e1061]: "X位置:"
+                  - generic [ref=e1062]:
+                    - button "向左移动 5px" [ref=e1063]:
+                      - img [ref=e1064]
+                    - spinbutton [ref=e1065]: "70"
+                    - button "向右移动 5px" [ref=e1066]:
+                      - img [ref=e1067]
+                - generic [ref=e1068]:
+                  - generic [ref=e1069]: "Y位置:"
+                  - generic [ref=e1070]:
+                    - button "向上移动 5px" [ref=e1071]:
+                      - img [ref=e1072]
+                    - spinbutton [ref=e1073]: "170"
+                    - button "向下移动 5px" [ref=e1074]:
+                      - img [ref=e1075]
+          - generic [ref=e1076]:
+            - generic [ref=e1077]:
+              - generic [ref=e1078]: 接口 2
+              - generic [ref=e1079]:
+                - generic [ref=e1080]: "#bullet2"
+                - button "隐藏文本框" [ref=e1081]:
+                  - img [ref=e1082]
+            - textbox [ref=e1085]: ● 3 x USB 3.0, 1 x USB 2.0
+            - generic [ref=e1087]:
+              - generic [ref=e1088]:
+                - generic [ref=e1089]: 文字风格
+                - combobox [ref=e1090]:
+                  - option "商务黑标题" [selected]
+                  - option "品牌蓝副标题"
+                  - option "说明深灰"
+                  - option "信息浅灰"
+                  - option "深底白字"
+              - generic [ref=e1091]:
+                - generic [ref=e1092]: 框内对齐
+                - combobox [ref=e1093]:
+                  - option "左对齐" [selected]
+                  - option "居中"
+                  - option "右对齐"
+            - generic [ref=e1094]:
+              - generic [ref=e1095]:
+                - generic [ref=e1096]:
+                  - generic [ref=e1097]: "字号:"
+                  - generic [ref=e1098]:
+                    - button [ref=e1099]:
+                      - img [ref=e1100]
+                    - spinbutton [ref=e1101]: "19"
+                    - button [ref=e1102]:
+                      - img [ref=e1103]
+                - generic [ref=e1104]:
+                  - generic [ref=e1105]: "行距:"
+                  - generic [ref=e1106]:
+                    - button [ref=e1107]:
+                      - img [ref=e1108]
+                    - spinbutton [ref=e1109]: "24"
+                    - button [ref=e1110]:
+                      - img [ref=e1111]
+                - generic [ref=e1112]:
+                  - generic [ref=e1113]: "框宽:"
+                  - generic [ref=e1114]:
+                    - button [ref=e1115]:
+                      - img [ref=e1116]
+                    - spinbutton [ref=e1117]: "300"
+                    - button [ref=e1118]:
+                      - img [ref=e1119]
+              - generic [ref=e1120]:
+                - generic [ref=e1121]:
+                  - generic [ref=e1122]: "X位置:"
+                  - generic [ref=e1123]:
+                    - button "向左移动 5px" [ref=e1124]:
+                      - img [ref=e1125]
+                    - spinbutton [ref=e1126]: "70"
+                    - button "向右移动 5px" [ref=e1127]:
+                      - img [ref=e1128]
+                - generic [ref=e1129]:
+                  - generic [ref=e1130]: "Y位置:"
+                  - generic [ref=e1131]:
+                    - button "向上移动 5px" [ref=e1132]:
+                      - img [ref=e1133]
+                    - spinbutton [ref=e1134]: "220"
+                    - button "向下移动 5px" [ref=e1135]:
+                      - img [ref=e1136]
+          - generic [ref=e1137]:
+            - generic [ref=e1138]:
+              - generic [ref=e1139]: 接口 3
+              - generic [ref=e1140]:
+                - generic [ref=e1141]: "#bullet3"
+                - button "隐藏文本框" [ref=e1142]:
+                  - img [ref=e1143]
+            - textbox [ref=e1146]: ● 2 x COM (可扩展 6 COM)
+            - generic [ref=e1148]:
+              - generic [ref=e1149]:
+                - generic [ref=e1150]: 文字风格
+                - combobox [ref=e1151]:
+                  - option "商务黑标题" [selected]
+                  - option "品牌蓝副标题"
+                  - option "说明深灰"
+                  - option "信息浅灰"
+                  - option "深底白字"
+              - generic [ref=e1152]:
+                - generic [ref=e1153]: 框内对齐
+                - combobox [ref=e1154]:
+                  - option "左对齐" [selected]
+                  - option "居中"
+                  - option "右对齐"
+            - generic [ref=e1155]:
+              - generic [ref=e1156]:
+                - generic [ref=e1157]:
+                  - generic [ref=e1158]: "字号:"
+                  - generic [ref=e1159]:
+                    - button [ref=e1160]:
+                      - img [ref=e1161]
+                    - spinbutton [ref=e1162]: "19"
+                    - button [ref=e1163]:
+                      - img [ref=e1164]
+                - generic [ref=e1165]:
+                  - generic [ref=e1166]: "行距:"
+                  - generic [ref=e1167]:
+                    - button [ref=e1168]:
+                      - img [ref=e1169]
+                    - spinbutton [ref=e1170]: "24"
+                    - button [ref=e1171]:
+                      - img [ref=e1172]
+                - generic [ref=e1173]:
+                  - generic [ref=e1174]: "框宽:"
+                  - generic [ref=e1175]:
+                    - button [ref=e1176]:
+                      - img [ref=e1177]
+                    - spinbutton [ref=e1178]: "300"
+                    - button [ref=e1179]:
+                      - img [ref=e1180]
+              - generic [ref=e1181]:
+                - generic [ref=e1182]:
+                  - generic [ref=e1183]: "X位置:"
+                  - generic [ref=e1184]:
+                    - button "向左移动 5px" [ref=e1185]:
+                      - img [ref=e1186]
+                    - spinbutton [ref=e1187]: "70"
+                    - button "向右移动 5px" [ref=e1188]:
+                      - img [ref=e1189]
+                - generic [ref=e1190]:
+                  - generic [ref=e1191]: "Y位置:"
+                  - generic [ref=e1192]:
+                    - button "向上移动 5px" [ref=e1193]:
+                      - img [ref=e1194]
+                    - spinbutton [ref=e1195]: "270"
+                    - button "向下移动 5px" [ref=e1196]:
+                      - img [ref=e1197]
+          - generic [ref=e1198]:
+            - generic [ref=e1199]:
+              - generic [ref=e1200]: 接口 4
+              - generic [ref=e1201]:
+                - generic [ref=e1202]: "#bullet4"
+                - button "隐藏文本框" [ref=e1203]:
+                  - img [ref=e1204]
+            - textbox [ref=e1207]: ● 1 x DP, 1 x HDMI
+            - generic [ref=e1209]:
+              - generic [ref=e1210]:
+                - generic [ref=e1211]: 文字风格
+                - combobox [ref=e1212]:
+                  - option "商务黑标题" [selected]
+                  - option "品牌蓝副标题"
+                  - option "说明深灰"
+                  - option "信息浅灰"
+                  - option "深底白字"
+              - generic [ref=e1213]:
+                - generic [ref=e1214]: 框内对齐
+                - combobox [ref=e1215]:
+                  - option "左对齐" [selected]
+                  - option "居中"
+                  - option "右对齐"
+            - generic [ref=e1216]:
+              - generic [ref=e1217]:
+                - generic [ref=e1218]:
+                  - generic [ref=e1219]: "字号:"
+                  - generic [ref=e1220]:
+                    - button [ref=e1221]:
+                      - img [ref=e1222]
+                    - spinbutton [ref=e1223]: "20"
+                    - button [ref=e1224]:
+                      - img [ref=e1225]
+                - generic [ref=e1226]:
+                  - generic [ref=e1227]: "行距:"
+                  - generic [ref=e1228]:
+                    - button [ref=e1229]:
+                      - img [ref=e1230]
+                    - spinbutton [ref=e1231]: "24"
+                    - button [ref=e1232]:
+                      - img [ref=e1233]
+                - generic [ref=e1234]:
+                  - generic [ref=e1235]: "框宽:"
+                  - generic [ref=e1236]:
+                    - button [ref=e1237]:
+                      - img [ref=e1238]
+                    - spinbutton [ref=e1239]: "300"
+                    - button [ref=e1240]:
+                      - img [ref=e1241]
+              - generic [ref=e1242]:
+                - generic [ref=e1243]:
+                  - generic [ref=e1244]: "X位置:"
+                  - generic [ref=e1245]:
+                    - button "向左移动 5px" [ref=e1246]:
+                      - img [ref=e1247]
+                    - spinbutton [ref=e1248]: "70"
+                    - button "向右移动 5px" [ref=e1249]:
+                      - img [ref=e1250]
+                - generic [ref=e1251]:
+                  - generic [ref=e1252]: "Y位置:"
+                  - generic [ref=e1253]:
+                    - button "向上移动 5px" [ref=e1254]:
+                      - img [ref=e1255]
+                    - spinbutton [ref=e1256]: "320"
+                    - button "向下移动 5px" [ref=e1257]:
+                      - img [ref=e1258]
+          - generic [ref=e1259]:
+            - generic [ref=e1260]:
+              - generic [ref=e1261]: 接口 5
+              - generic [ref=e1262]:
+                - generic [ref=e1263]: "#bullet5"
+                - button "隐藏文本框" [ref=e1264]:
+                  - img [ref=e1265]
+            - textbox [ref=e1268]: ● 1 x M.2, 1 x M.2, 1 x Nano SIM
+            - generic [ref=e1270]:
+              - generic [ref=e1271]:
+                - generic [ref=e1272]: 文字风格
+                - combobox [ref=e1273]:
+                  - option "商务黑标题" [selected]
+                  - option "品牌蓝副标题"
+                  - option "说明深灰"
+                  - option "信息浅灰"
+                  - option "深底白字"
+              - generic [ref=e1274]:
+                - generic [ref=e1275]: 框内对齐
+                - combobox [ref=e1276]:
+                  - option "左对齐" [selected]
+                  - option "居中"
+                  - option "右对齐"
+            - generic [ref=e1277]:
+              - generic [ref=e1278]:
+                - generic [ref=e1279]:
+                  - generic [ref=e1280]: "字号:"
+                  - generic [ref=e1281]:
+                    - button [ref=e1282]:
+                      - img [ref=e1283]
+                    - spinbutton [ref=e1284]: "18"
+                    - button [ref=e1285]:
+                      - img [ref=e1286]
+                - generic [ref=e1287]:
+                  - generic [ref=e1288]: "行距:"
+                  - generic [ref=e1289]:
+                    - button [ref=e1290]:
+                      - img [ref=e1291]
+                    - spinbutton [ref=e1292]: "24"
+                    - button [ref=e1293]:
+                      - img [ref=e1294]
+                - generic [ref=e1295]:
+                  - generic [ref=e1296]: "框宽:"
+                  - generic [ref=e1297]:
+                    - button [ref=e1298]:
+                      - img [ref=e1299]
+                    - spinbutton [ref=e1300]: "300"
+                    - button [ref=e1301]:
+                      - img [ref=e1302]
+              - generic [ref=e1303]:
+                - generic [ref=e1304]:
+                  - generic [ref=e1305]: "X位置:"
+                  - generic [ref=e1306]:
+                    - button "向左移动 5px" [ref=e1307]:
+                      - img [ref=e1308]
+                    - spinbutton [ref=e1309]: "70"
+                    - button "向右移动 5px" [ref=e1310]:
+                      - img [ref=e1311]
+                - generic [ref=e1312]:
+                  - generic [ref=e1313]: "Y位置:"
+                  - generic [ref=e1314]:
+                    - button "向上移动 5px" [ref=e1315]:
+                      - img [ref=e1316]
+                    - spinbutton [ref=e1317]: "370"
+                    - button "向下移动 5px" [ref=e1318]:
+                      - img [ref=e1319]
+    - generic [ref=e253]:
+      - button "导出当前图 (P101-1G-4.jpg)" [ref=e1320]:
+        - img [ref=e255]
+        - text: 导出当前图 (P101-1G-4.jpg)
+      - button "一键导出全部 4 张 JPG" [ref=e258]:
+        - img [ref=e259]
+        - text: 一键导出全部 4 张 JPG
+  - generic [ref=e263]:
+    - generic [ref=e264]:
+      - generic [ref=e265]:
+        - generic [ref=e267]: "当前视图: 图4：接口扩展 (对应 09.jpg)"
+        - generic [ref=e268]: 750 x 400 PX
+      - generic [ref=e269]:
+        - generic [ref=e270]:
+          - button "原版 750×400" [ref=e271]
+          - button "宽屏 1920×820" [ref=e272]
+          - button "方形 1000×1000" [ref=e273]
+        - generic [ref=e274]:
+          - button "左" [disabled] [ref=e275]
+          - button "中" [disabled] [ref=e276]
+          - button "右" [disabled] [ref=e277]
+          - button "上" [disabled] [ref=e278]
+          - button "中高" [disabled] [ref=e279]
+          - button "下" [disabled] [ref=e280]
+        - button "显示定位网格" [ref=e281]:
+          - img [ref=e282]
+          - text: 显示定位网格
+        - button "智能参考线已开" [ref=e285]
+    - generic [ref=e287]:
+      - generic:
+        - generic: yantronic_marketing_builder_canvas.png
+    - generic [ref=e290]:
+      - img [ref=e291]
+      - generic [ref=e293]:
+        - heading "💡 快捷排版指南与尺寸自适应" [level=4] [ref=e294]
+        - paragraph [ref=e295]:
+          - text: 1. 每一个编辑版式的产品图均是
+          - strong [ref=e296]: 独立配置
+          - text: 的。您可以切换左侧菜单依次上传各个页面的图片。
+        - paragraph [ref=e297]: 2. 文字和图片拖拽时会优先吸附画布中心线、边缘线以及其他元素边缘线，配合上方对齐按钮能更快排整齐。
+        - paragraph [ref=e298]: "3. 导出统一为 JPG，并自动压缩到单张 5MB 以内。文件名按“产品名-序号”生成，例如 `TPM7000-1.jpg`。"
